@@ -1,5 +1,6 @@
 package cz.cuni.mff.tranova;
 
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,17 +13,36 @@ public class Game {
 
     private static ArrayList<Question> questions = new ArrayList<Question>();
 
-    private static void init(){
+    private static void loadQuestions(String fileName){
         try {
-            List<String> lines = Files.readAllLines(Paths.get(Game.class.getClassLoader().getResource("questions.txt").toURI()));
+            Path path = Paths.get(Game.class.getClassLoader().getResource(fileName).toURI());
+            List<String> lines = Files.readAllLines(path);
+            List<String> wrongAnswers = new ArrayList<>();
+            String questionText = null;
+            String rightAnswer = null;
 
-            for (int i = 0; i < lines.size(); i += 5){
-                Question q = new Question(lines.get(i), lines.get(i+1), lines.get(i+2), lines.get(i+3), lines.get(i+4));
-                questions.add(q);
+            for (String line : lines) {
+                if (line.trim().isEmpty()) {
+                    if (questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
+                        questions.add(new Question(questionText, rightAnswer, wrongAnswers));
+                    }
+                    questionText = null;
+                    rightAnswer = null;
+                    wrongAnswers = new ArrayList<>();
+                } else if (questionText == null) {
+                    questionText = line;
+                } else if (rightAnswer == null) {
+                    rightAnswer = line;
+                } else {
+                    wrongAnswers.add(line);
+                }
+            }
+            if (questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
+                questions.add(new Question(questionText, rightAnswer, wrongAnswers));
             }
         }
         catch (Exception e){
-            System.out.println("couldnt read questions.txt");
+            System.out.println("couldnt read " + fileName);
             System.exit(-1);
         }
     }
@@ -34,19 +54,19 @@ public class Game {
             Question q = questions.remove(0);
             System.out.println(q.text);
 
-            for (int i = 0; i < q.answers.length; i++){ //number of question + actual question
-                System.out.println(i + " " + q.answers[i]);
+            for (int i = 0; i < q.answers.size(); i++){ //number of question + actual question
+                System.out.println(i + " " + q.answers.get(i));
             }
 
             int input = scanner.nextInt();
 
-            if (input< 0 || input > q.answers.length - 1){ //check if input is in valid range
+            if (input< 0 || input > q.answers.size() - 1){ //check if input is in valid range
                 System.out.println("invalid input");
                 System.exit(-2); //either exit or continue and show next question
             }
 
             //input valid
-            if (q.rightAnswer.equals(q.answers[input])){
+            if (q.rightAnswer.equals(q.answers.get(input))){
                 System.out.println("right");
             }
             else {
@@ -58,7 +78,12 @@ public class Game {
 
 
     public static void main(String[] args){
-        init();
+        String fileName = "questions.txt"; // Default file name
+        if (args.length > 0) {
+            fileName = args[0]; // Takes the first command line argument as file name if provided
+        }
+
+        loadQuestions(fileName);
         loop();
     }
 }
