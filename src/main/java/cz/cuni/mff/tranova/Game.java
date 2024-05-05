@@ -59,12 +59,18 @@ public class Game {
                 option++;
             }
 
-            String input = scanner.next().toUpperCase();
-            int selectedOpt = input.charAt(0) - 'A';
+            boolean validInput = false;
+            int selectedOpt = -1;
 
-            if (selectedOpt < 0 || selectedOpt >= q.answers.size()){ //check if input is in valid range
-                System.out.println("invalid input");
-                System.exit(-2); //either exit or continue and show next question
+            while (!validInput) {
+                String input = scanner.next().toUpperCase();
+
+                if (input.length() == 1 && input.charAt(0) >= 'A' && input.charAt(0) < 'A' + q.answers.size()){
+                    selectedOpt = input.charAt(0) - 'A';
+                    validInput = true;
+                } else {
+                    System.out.println("invalid input, try again");
+                }
             }
 
             //input valid
