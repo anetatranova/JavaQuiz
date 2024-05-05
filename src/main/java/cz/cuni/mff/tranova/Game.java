@@ -1,5 +1,6 @@
 package cz.cuni.mff.tranova;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,8 +42,11 @@ public class Game {
                 questions.add(new Question(questionText, rightAnswer, wrongAnswers));
             }
         }
+        catch (IOException e){
+            System.out.println("unable to read file " + fileName);
+        }
         catch (Exception e){
-            System.out.println("couldnt read " + fileName);
+            System.out.println("unexpected error " + e.getMessage());
             System.exit(-1);
         }
     }
@@ -50,8 +54,12 @@ public class Game {
     private static void loop() {
         Scanner scanner = new Scanner(System.in);
 
-        for (Question q : questions){
-            System.out.println(q.text);
+        int correctCount = 0;
+        int questionCount = questions.size();
+
+        for (int qIndex = 0; qIndex < questionCount; qIndex++){
+            Question q = questions.get(qIndex);
+            System.out.println("Otázka "+ (qIndex + 1) +"/"+questionCount + ": " + q.text);
             char option = 'A';
 
             for (String answer : q.answers){
@@ -76,11 +84,14 @@ public class Game {
             //input valid
             if (q.rightAnswer.equals(q.answers.get(selectedOpt))){
                 System.out.println("right");
+                correctCount++;
             }
             else {
                 System.out.println("wrong");
             }
         }
+        System.out.println("hotovo, správně zodpovězených otázek bylo " + correctCount + " z " + questionCount + " otázek");
+        scanner.close();
     }
 
 

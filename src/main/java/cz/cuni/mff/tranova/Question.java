@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Collections;
 
 public class Question {
-    //public String category;
+    public String category;
     public String text;
     public String rightAnswer;
     public List<String> answers;
 
     public Question(String text, String rightAnswer, List<String> wrongAnswers){
         //konstruktry
-        //this.category = category;
+        this.category = category;
         this.text = text;
         this.rightAnswer = rightAnswer;
         this.answers = new ArrayList<>(wrongAnswers);

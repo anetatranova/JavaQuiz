@@ -3,8 +3,12 @@ can take different file as argument X
 add categories
 variable number of wrong answers X
 alphabetical options X
+check if the question file is in right format
+random question order
+user profile for statistics?
+question timer?
 user interface
  - privitat a zeptat se na pocet kategorii a otazek
- - po invalid inputu zkusit znovu
+ - po invalid inputu zkusit znovu X
 
 chybový protokol
