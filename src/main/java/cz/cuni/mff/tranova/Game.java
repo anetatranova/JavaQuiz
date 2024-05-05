@@ -50,23 +50,25 @@ public class Game {
     private static void loop() {
         Scanner scanner = new Scanner(System.in);
 
-        while (questions.size() > 0){
-            Question q = questions.remove(0);
+        for (Question q : questions){
             System.out.println(q.text);
+            char option = 'A';
 
-            for (int i = 0; i < q.answers.size(); i++){ //number of question + actual question
-                System.out.println(i + " " + q.answers.get(i));
+            for (String answer : q.answers){
+                System.out.println(option + ") " + answer);
+                option++;
             }
 
-            int input = scanner.nextInt();
+            String input = scanner.next().toUpperCase();
+            int selectedOpt = input.charAt(0) - 'A';
 
-            if (input< 0 || input > q.answers.size() - 1){ //check if input is in valid range
+            if (selectedOpt < 0 || selectedOpt >= q.answers.size()){ //check if input is in valid range
                 System.out.println("invalid input");
                 System.exit(-2); //either exit or continue and show next question
             }
 
             //input valid
-            if (q.rightAnswer.equals(q.answers.get(input))){
+            if (q.rightAnswer.equals(q.answers.get(selectedOpt))){
                 System.out.println("right");
             }
             else {
@@ -74,7 +76,6 @@ public class Game {
             }
         }
     }
-
 
 
     public static void main(String[] args){
