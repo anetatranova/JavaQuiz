@@ -10,7 +10,7 @@ public class Question {
     public String rightAnswer;
     public List<String> answers;
 
-    public Question(String text, String rightAnswer, List<String> wrongAnswers){
+    public Question(String category, String text, String rightAnswer, List<String> wrongAnswers){
         //konstruktry
         this.category = category;
         this.text = text;

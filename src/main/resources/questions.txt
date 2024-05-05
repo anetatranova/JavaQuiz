@@ -1,12 +1,66 @@
+matematika
 Kolik je 4x4?
 16
 4
 18
 24
 
+geografie
+Kolik metrů měří nejvyšší hora na světě?
+8848
+8756
+8801
+8954
+
+politika
+Kdo je současným prezidentem USA?
+Joe Biden
+Barack Obama
+George W. Bush
+Bill Clinton
+
+věda
+Co je chemický prvek s označením H?
+vodík
+helium
+hafnium
+hassium
+
+politika
 Která země v EU je největší podle počtu obyvatel?
 Německo
 Francie
 Itálie
 Španělsko
 Polsko
+
+geografie
+Jaký je největší ostrov na světě?
+Grónsko
+Nová Guinea
+Borneo
+Madagaskar
+
+věda
+Jaký prvek má největší zastoupení v atmosféře na Zemi?
+dusík
+kyslík
+argon
+vodík
+
+geografie
+Jaké je největší jezero na světě?
+Kaspické moře
+Viktoriino jezero
+Huronské jezero
+Bajkalské jezero
+Mrtvé moře
+
+matematika
+Kolik je 3x4?
+12
+5
+7
+0
+90
+6

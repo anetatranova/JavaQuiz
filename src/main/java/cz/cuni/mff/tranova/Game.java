@@ -5,9 +5,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Game {
@@ -19,18 +18,22 @@ public class Game {
             Path path = Paths.get(Game.class.getClassLoader().getResource(fileName).toURI());
             List<String> lines = Files.readAllLines(path);
             List<String> wrongAnswers = new ArrayList<>();
+            String category = null;
             String questionText = null;
             String rightAnswer = null;
 
             for (String line : lines) {
                 if (line.trim().isEmpty()) {
-                    if (questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
-                        questions.add(new Question(questionText, rightAnswer, wrongAnswers));
+                    if (category != null && questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
+                        questions.add(new Question(category, questionText, rightAnswer, wrongAnswers));
                     }
+                    category = null;
                     questionText = null;
                     rightAnswer = null;
                     wrongAnswers = new ArrayList<>();
-                } else if (questionText == null) {
+                } else if (category == null) {
+                    category = line;
+                }else if (questionText == null) {
                     questionText = line;
                 } else if (rightAnswer == null) {
                     rightAnswer = line;
@@ -38,8 +41,8 @@ public class Game {
                     wrongAnswers.add(line);
                 }
             }
-            if (questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
-                questions.add(new Question(questionText, rightAnswer, wrongAnswers));
+            if (category != null && questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
+                questions.add(new Question(category, questionText, rightAnswer, wrongAnswers));
             }
         }
         catch (IOException e){
@@ -51,14 +54,82 @@ public class Game {
         }
     }
 
-    private static void loop() {
+    private static void startQuiz() {
+        Scanner scanner = new Scanner(System.in);
+
+        List<String> uniqueCategories = new ArrayList<>();
+        Map<Integer, String> categories = new LinkedHashMap<>();
+        int index = 1;
+
+        for (Question q : questions) {
+            if (!uniqueCategories.contains(q.category)) {
+                uniqueCategories.add(q.category);
+            }
+        }
+
+        for (String category : uniqueCategories) {
+            categories.put(index++, category);
+        }
+
+        System.out.println("vyber kategorii/e: ");
+        for (Map.Entry<Integer, String> entry : categories.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+        //enter number of the category or 0 for all categories
+
+        String inputLine = scanner.nextLine();
+        String[] inputs = inputLine.split("\\s+");
+        List<Integer> selectedNumbers = new ArrayList<>();
+
+        try{
+            for (String input : inputs){
+                int selectedInt = Integer.parseInt(input);
+                if (categories.containsKey(selectedInt) || selectedInt == 0){
+                    selectedNumbers.add(selectedInt);
+                } else {
+                    throw new IllegalArgumentException("invalid selection");
+                }
+            }
+        } catch (NumberFormatException e){
+            System.out.println("invalid input, numbers expected");
+            return;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        List<Question> filteredQuestions = new ArrayList<>();
+        if (selectedNumbers.contains(0)) {
+            filteredQuestions.addAll(questions);
+        } else {
+            for (Question q : questions) {
+                if (isCategorySelected(q, categories, selectedNumbers)) {
+                    filteredQuestions.add(q);
+                }
+            }
+        }
+
+        loop(filteredQuestions);
+    }
+
+    private static boolean isCategorySelected(Question q, Map<Integer, String> categories, List<Integer> selectedNumbers) {
+        for (Integer num : selectedNumbers) {
+            if (categories.get(num).equalsIgnoreCase(q.category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private static void loop(List<Question> filteredQuestions) {
         Scanner scanner = new Scanner(System.in);
 
         int correctCount = 0;
-        int questionCount = questions.size();
+        int questionCount = filteredQuestions.size();
 
         for (int qIndex = 0; qIndex < questionCount; qIndex++){
-            Question q = questions.get(qIndex);
+            Question q = filteredQuestions.get(qIndex);
             System.out.println("Otázka "+ (qIndex + 1) +"/"+questionCount + ": " + q.text);
             char option = 'A';
 
@@ -102,6 +173,6 @@ public class Game {
         }
 
         loadQuestions(fileName);
-        loop();
+        startQuiz();
     }
 }
