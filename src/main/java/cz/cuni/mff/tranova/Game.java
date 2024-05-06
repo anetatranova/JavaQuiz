@@ -77,27 +77,40 @@ public class Game {
         }
         //enter number of the category or 0 for all categories
 
-        String inputLine = scanner.nextLine();
-        String[] inputs = inputLine.split("\\s+");
+        boolean validInput = false;
         List<Integer> selectedNumbers = new ArrayList<>();
 
-        try{
-            for (String input : inputs){
-                int selectedInt = Integer.parseInt(input);
-                if (categories.containsKey(selectedInt) || selectedInt == 0){
-                    selectedNumbers.add(selectedInt);
-                } else {
-                    throw new IllegalArgumentException("invalid selection");
+        while(!validInput) {
+            String inputLine = scanner.nextLine();  //user will choose categories he wants top play with
+            String[] inputs = inputLine.split("\\s+");
+            selectedNumbers.clear();;
+
+            try {
+                for (String input : inputs) {
+                    int selectedInt = Integer.parseInt(input);
+                    if (categories.containsKey(selectedInt) || selectedInt == 0) {
+                        selectedNumbers.add(selectedInt);
+                    } else {
+                        throw new IllegalArgumentException("invalid selection");
+                    }
                 }
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("invalid input, numbers expected");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-        } catch (NumberFormatException e){
-            System.out.println("invalid input, numbers expected");
-            return;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
         }
 
+        List<Question> filteredQuestions = filterQuestions(questions,categories,selectedNumbers);
+
+        Collections.shuffle(filteredQuestions);
+
+        loop(filteredQuestions);
+        scanner.close();
+    }
+
+    private static List<Question> filterQuestions(List<Question> questions, Map<Integer, String> categories, List<Integer> selectedNumbers){
         List<Question> filteredQuestions = new ArrayList<>();
         if (selectedNumbers.contains(0)) {
             filteredQuestions.addAll(questions);
@@ -108,8 +121,7 @@ public class Game {
                 }
             }
         }
-
-        loop(filteredQuestions);
+        return filteredQuestions;
     }
 
     private static boolean isCategorySelected(Question q, Map<Integer, String> categories, List<Integer> selectedNumbers) {
