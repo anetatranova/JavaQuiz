@@ -114,10 +114,25 @@ public class Game {
         }
 
         List<Question> filteredQuestions = filterQuestions(questions,categories,selectedNumbers);
+        int totalQuestionsAvailable = filteredQuestions.size();
+
+        System.out.println("Vyber si počet otázek od 1 do " + totalQuestionsAvailable);
+        Scanner scanner1 = new Scanner(System.in);
+        int numberOfQuestionToAnswer = 0;
+        while(true){
+            int input = scanner1.nextInt();
+            if (input >= 1 && input <= totalQuestionsAvailable){
+                numberOfQuestionToAnswer = input;
+                break;
+            }
+            else {
+                System.out.println("invalid input, enter number in given range");
+            }
+        }
 
         Collections.shuffle(filteredQuestions);
-
-        loop(filteredQuestions);
+        List<Question> finalQuestionList = filteredQuestions.subList(0, numberOfQuestionToAnswer);
+        loop(finalQuestionList);
         scanner.close();
     }
 
