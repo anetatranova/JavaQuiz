@@ -59,21 +59,32 @@ public class Game {
 
         List<String> uniqueCategories = new ArrayList<>();
         Map<Integer, String> categories = new LinkedHashMap<>();
+        Map<String,Integer> questionCountInCategory = new HashMap<>();
         int index = 1;
 
         for (Question q : questions) {
             if (!uniqueCategories.contains(q.category)) {
                 uniqueCategories.add(q.category);
             }
+
+            if (questionCountInCategory.containsKey(q.category)){
+                int currCount = questionCountInCategory.get(q.category);
+                questionCountInCategory.put(q.category, currCount+1);
+            } else {
+                questionCountInCategory.put(q.category,1);
+            }
         }
 
-        for (String category : uniqueCategories) {
+        for (String category : uniqueCategories) { //ocislovani kategorii
             categories.put(index++, category);
         }
 
-        System.out.println("vyber kategorii/e: ");
+        System.out.println("Vyber kategorii/e se kterými budeš chtít hrát, pokud napíšeš 0, vybereš tím všechny kategorie.");
         for (Map.Entry<Integer, String> entry : categories.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
+            String category = entry.getValue();
+            int count = questionCountInCategory.get(category);
+
+            System.out.println(entry.getKey() + ": " + category + " (" + count + " otázek)");
         }
         //enter number of the category or 0 for all categories
 
@@ -83,7 +94,7 @@ public class Game {
         while(!validInput) {
             String inputLine = scanner.nextLine();  //user will choose categories he wants top play with
             String[] inputs = inputLine.split("\\s+");
-            selectedNumbers.clear();;
+            selectedNumbers.clear();
 
             try {
                 for (String input : inputs) {
