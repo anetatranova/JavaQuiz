@@ -9,7 +9,7 @@ public class Game {
     private static QuestionManager questionManager;
     private static CategoryManager categoryManager;
     private static Scanner scanner;
-1
+
     public Game(){
         questionManager = new QuestionManager();
         this.categoryManager = new CategoryManager();

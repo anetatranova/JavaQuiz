@@ -10,15 +10,14 @@ public class UIHelper {
     }
 
     public void showCategories(Map<Integer, String> categories, CategoryManager categoryManager) {
-        System.out.println("Available categories (Enter '0' to select all):");
+        System.out.println("vyber kategorii/e, číslem 0 vybereš všechny.");
         for (Map.Entry<Integer, String> entry : categories.entrySet()) {
             int questionCount = categoryManager.getQuestionCountByCategory(entry.getValue());
-            System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " questions)");
+            System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " otázek)");
         }
     }
 
     public List<String> getUserCategorySelections(Map<Integer, String> categories) {
-        System.out.println("Please enter the numbers of the categories you wish to answer questions from, separated by spaces:");
         List<String> selections = new ArrayList<>();
         boolean valid = false;
         while (!valid) {
@@ -35,7 +34,7 @@ public class UIHelper {
                     } else if (categories.containsKey(selection)) {
                         selections.add(categories.get(selection));
                     } else {
-                        System.out.println("Invalid category number: " + selection + ". Please try again.");
+                        System.out.println("špatně zvolené číslo " + selection + ", zkus to znovu.");
                         selections.clear();
                         break;
                     }
@@ -44,7 +43,7 @@ public class UIHelper {
                     valid = true;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter numbers only.");
+                System.out.println("musíš vybrat číslo.");
                 selections.clear();
             }
         }
@@ -52,45 +51,62 @@ public class UIHelper {
     }
 
     public int getUserQuestionCount(int maxQuestions) {
-        System.out.println("How many questions would you like to answer? (up to " + maxQuestions + "):");
+        System.out.println("kolik otázek v kvízu chceš? (maximálně " + maxQuestions + ")");
         while (true) {
             try {
                 int count = Integer.parseInt(scanner.nextLine());
                 if (count >= 1 && count <= maxQuestions) {
                     return count;
                 } else {
-                    System.out.println("Please enter a number between 1 and " + maxQuestions + ".");
+                    System.out.println("vyber číslo v rozmezí 1 do " + maxQuestions + ".");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input; please enter a number.");
+                System.out.println("musíš vybrat pouze číslo.");
             }
         }
     }
 
     public void displayFinalScore(int score, int totalQuestions) {
-        System.out.println("Quiz completed! You scored " + score + " out of " + totalQuestions + ".");
+        System.out.println("Kvíz jsi dokončil se skórem " + score + " z " + totalQuestions + ".");
     }
 
     public void displayQuestionAndOptions(Question question, int questionNumber, int totalQuestions) {
-        System.out.println("Question " + questionNumber + " of " + totalQuestions + ": " + question.getText());
-        char option = 'A';
-        Map<Character, String> answerMap = new HashMap<>();
-        for (String answer : question.getAnswers()) {
-            System.out.println(option + ". " + answer);
-            answerMap.put(option, answer);
-            option++;
+        System.out.println("Otázka " + questionNumber + " z " + totalQuestions + ": " + question.getText());
+        List<String> labels = generateAnswerLabels(question.getAnswers().size());
+        for (int i = 0; i < question.getAnswers().size(); i++) {
+            System.out.println(labels.get(i) + ". " + question.getAnswers().get(i));
         }
-        question.setAnswerMap(answerMap);  // Store the map in the Question object if needed, or manage it externally
     }
-    public char getValidAnswerFromUser(int optionsSize) {
+
+    public String getValidAnswerFromUser(int optionsSize) {
+        List<String> validAnswers = generateAnswerLabels(optionsSize);
         while (true) {
-            System.out.print("Enter your answer (A, B, C, etc.): ");
             String input = scanner.nextLine().trim().toUpperCase();
-            if (input.length() == 1 && input.charAt(0) >= 'A' && input.charAt(0) < 'A' + optionsSize) {
-                return input.charAt(0);
+            if (validAnswers.contains(input)) {
+                return input;
             } else {
-                System.out.println("Invalid input. Please select from the given options.");
+                System.out.println("Neplatný vstup, vyberte písmeno z nabídky.");
             }
         }
     }
+
+    public static List<String> generateAnswerLabels(int numberOfAnswers) {
+        List<String> labels = new ArrayList<>();
+        int firstLetter = 'A';
+        int range = 26;  // Number of letters in the alphabet
+
+        for (int i = 0; i < numberOfAnswers; i++) {
+            int firstCharNum = i / range;
+            int secondCharNum = i % range;
+            StringBuilder label = new StringBuilder();
+            if (firstCharNum > 0) {
+                label.append((char) (firstLetter + firstCharNum - 1));
+            }
+            label.append((char) (firstLetter + secondCharNum));
+            labels.add(label.toString());
+        }
+        return labels;
+    }
+
+
 }

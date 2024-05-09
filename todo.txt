@@ -16,6 +16,5 @@ add question count for each category X
 then ask user how many would he like to have in total X
 (ask user if he would like to have a limited time for each question)
 
-
 chybový protokol - kde mel uzivatel chyby
 ask user for name and save it in a protocol

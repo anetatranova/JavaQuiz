@@ -32,11 +32,6 @@ public class QuizManager {
         runQuiz(questionsToAnswer);
     }
 
-    private List<Question> selectQuestions(List<Question> questions) {
-        // Logic to select questions based on some criteria (e.g., categories)
-        return questions; // Placeholder
-    }
-
     private List<Question> pickQuestions(List<Question> questions, int count) {
         Collections.shuffle(questions);
         return questions.subList(0, count);
@@ -47,17 +42,25 @@ public class QuizManager {
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
             uiHelper.displayQuestionAndOptions(question, i + 1, questions.size());
-            char userAnswer = uiHelper.getValidAnswerFromUser(question.getAnswers().size());
+            String userAnswerLabel = uiHelper.getValidAnswerFromUser(question.getAnswers().size());
 
-            String correctAnswer = question.getAnswers().get(userAnswer - 'A');
-            if (correctAnswer.equalsIgnoreCase(question.getRightAnswer())) {
+            // Obtain the correct index of the user's answer based on the label
+            int userAnswerIndex = UIHelper.generateAnswerLabels(question.getAnswers().size()).indexOf(userAnswerLabel);
+
+            // Retrieve the user's selected answer using the index
+            String userSelectedAnswer = question.getAnswers().get(userAnswerIndex);
+
+            if (userSelectedAnswer.equalsIgnoreCase(question.getRightAnswer())) {
                 correctCount++;
-                System.out.println("Correct!");
+                System.out.println("Správná odpověď!");
             } else {
-                System.out.println("Incorrect. The correct answer was: " + question.getRightAnswer());
+                System.out.println("Špatná odpověď, správná odpověď je: " + question.getRightAnswer());
             }
         }
         uiHelper.displayFinalScore(correctCount, questions.size());
     }
+
 }
+
+
 
