@@ -12,7 +12,7 @@ public class UIHelper {
     public void showCategories(Map<Integer, String> categories, CategoryManager categoryManager) {
         System.out.println("vyber kategorii/e, číslem 0 vybereš všechny.");
         for (Map.Entry<Integer, String> entry : categories.entrySet()) {
-            int questionCount = categoryManager.getQuestionCountByCategory(entry.getValue());
+            int questionCount = CategoryManager.getQuestionCountByCategory(entry.getValue());
             System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " otázek)");
         }
     }

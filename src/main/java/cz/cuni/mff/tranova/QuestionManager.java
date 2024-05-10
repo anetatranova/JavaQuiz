@@ -13,20 +13,21 @@ public class QuestionManager {
     //parse questions into Question objects
     //filtering fuctionality based on categories
 
-    private static ArrayList<Question> questions;
+    private ArrayList<Question> questions;
 
     public QuestionManager(){
         this.questions = new ArrayList<>();
     }
     public List<Question> loadQuestions(String fileName){
-
+        this.questions.clear();
+        
         try {
             Path path = Paths.get(Game.class.getClassLoader().getResource(fileName).toURI());
             List<String> lines = Files.readAllLines(path);
             parseQuestions(lines);
         } catch (Exception e) {
             System.out.println("Error loading questions: " + e.getMessage());
-            return new ArrayList<>();  // Return an empty list in case of error
+            this.questions = new ArrayList<>();  // Return an empty list in case of error
         }
         return new ArrayList<>(this.questions);
     }
@@ -40,12 +41,12 @@ public class QuestionManager {
         for (String line : lines) {
             if (line.trim().isEmpty()) {
                 if (category != null && questionText != null && rightAnswer != null && !wrongAnswers.isEmpty()) {
-                    questions.add(new Question(category, questionText, rightAnswer, wrongAnswers));
+                    this.questions.add(new Question(category, questionText, rightAnswer, wrongAnswers));
+                    wrongAnswers = new ArrayList<>();
                 }
                 category = null;
                 questionText = null;
                 rightAnswer = null;
-                wrongAnswers = new ArrayList<>();
             } else if (category == null) {
                 category = line;
             }else if (questionText == null) {

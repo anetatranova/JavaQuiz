@@ -13,12 +13,15 @@ public class CategoryManager {
 
     public CategoryManager(){
         this.categoryToIdMap = new LinkedHashMap<>();
-        categoryQuestionCount = new HashMap<>();
+        this.categoryQuestionCount = new HashMap<>();
         this.processedCategories = new HashSet<>();
     }
 
     public static void processCategories(List<Question> questions){
         int index = 1;
+        categoryToIdMap.clear();
+        categoryQuestionCount.clear();
+        processedCategories.clear();
         for (Question q : questions){
             String category = q.getCategory();
             if (!processedCategories.contains(category)) {

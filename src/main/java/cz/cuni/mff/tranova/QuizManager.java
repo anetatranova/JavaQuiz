@@ -1,5 +1,7 @@
 package cz.cuni.mff.tranova;
 
+import java.io.*;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,8 +18,26 @@ public class QuizManager {
         this.uiHelper = uiHelper;
     }
 
-    public void startQuiz() {
-        List<Question> allQuestions = questionManager.loadQuestions("questions.txt");
+    public void loadQuestions(String filename) throws IOException {
+        InputStream is = getClass().getClassLoader().getResourceAsStream(filename);
+        if (is == null) {
+            // Fallback if file not found in resources, try to load from file system
+            is = new FileInputStream(new File(filename));
+        }
+        Scanner scanner = new Scanner(is);
+        try {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                // Process each line to extract questions and answers
+            }
+        } finally {
+            scanner.close();
+            is.close();
+        }
+    }
+
+    public void startQuiz(List<Question> allQuestions) {
+        //List<Question> allQuestions = questionManager.loadQuestions("questions.txt");
         categoryManager.processCategories(allQuestions);
         Map<Integer,String> categories = categoryManager.getCategoryIdMap();
 
