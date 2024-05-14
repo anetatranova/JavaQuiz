@@ -10,7 +10,7 @@ public class UIHelper {
     }
 
     public void showCategories(Map<Integer, String> categories, CategoryManager categoryManager) {
-        System.out.println("vyber kategorii/e, číslem 0 vybereš všechny.");
+        System.out.println(" \n Vyber kategorii/e, číslem 0 vybereš všechny.");
         for (Map.Entry<Integer, String> entry : categories.entrySet()) {
             int questionCount = CategoryManager.getQuestionCountByCategory(entry.getValue());
             System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " otázek)");
@@ -51,17 +51,17 @@ public class UIHelper {
     }
 
     public int getUserQuestionCount(int maxQuestions) {
-        System.out.println("kolik otázek v kvízu chceš? (maximálně " + maxQuestions + ")");
+        System.out.println("Kolik otázek v kvízu chceš? (max " + maxQuestions + ")");
         while (true) {
             try {
                 int count = Integer.parseInt(scanner.nextLine());
                 if (count >= 1 && count <= maxQuestions) {
                     return count;
                 } else {
-                    System.out.println("vyber číslo v rozmezí 1 do " + maxQuestions + ".");
+                    System.out.println("Vyber číslo v rozmezí 1 do " + maxQuestions + ".");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("musíš vybrat pouze číslo.");
+                System.out.println("Musíš vybrat pouze číslo.");
             }
         }
     }
@@ -85,7 +85,7 @@ public class UIHelper {
             if (validAnswers.contains(input)) {
                 return input;
             } else {
-                System.out.println("Neplatný vstup, vyberte písmeno z nabídky.");
+                System.out.println("Neplatný vstup, vyber písmeno z nabídky.");
             }
         }
     }
@@ -108,5 +108,10 @@ public class UIHelper {
         return labels;
     }
 
-
+    public void displayUserStatistics(User user) {
+        System.out.println("Statistics for " + user.getUsername() + ":");
+        System.out.println("Highest Score: " + user.getHighestScore());
+        System.out.println("Total Quizzes Taken: " + user.getQuizzesTaken());
+        System.out.println("Average Score: " + user.getAverageScore());
+    }
 }

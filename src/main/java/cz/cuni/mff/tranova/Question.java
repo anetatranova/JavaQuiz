@@ -7,7 +7,7 @@ public class Question {
     public String text;
     public String rightAnswer;
     public List<String> answers;
-    private Map<Character, String> answerMap;
+    private String userAnswer;
 
     public Question(String category, String text, String rightAnswer, List<String> wrongAnswers){
         //konstruktry
@@ -16,7 +16,6 @@ public class Question {
         this.rightAnswer = rightAnswer;
         this.answers = new ArrayList<>(wrongAnswers);
         this.answers.add(rightAnswer);
-        this.answerMap = new HashMap<>();
         Collections.shuffle(this.answers);
 
     }
@@ -39,8 +38,12 @@ public class Question {
     public boolean checkAnswer(String userAnswer) {
         return rightAnswer.equalsIgnoreCase(userAnswer);
     }
-    // Sets the mapping of answer labels to their corresponding text
-    public void setAnswerMap(Map<Character, String> answerMap) {
-        this.answerMap = answerMap;
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
+    public boolean isCorrect() {
+        return userAnswer != null && userAnswer.equalsIgnoreCase(rightAnswer);
     }
 }

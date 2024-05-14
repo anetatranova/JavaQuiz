@@ -3,9 +3,6 @@ package cz.cuni.mff.tranova;
 import java.util.*;
 
 public class CategoryManager {
-    //maintains list of categories
-    //provides methods to get categories from questions
-    //map categories to thei IDs for easier access
 
     private static Map<String, Integer> categoryToIdMap;
     private static Map<String, Integer> categoryQuestionCount;

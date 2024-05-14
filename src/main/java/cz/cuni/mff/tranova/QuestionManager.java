@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestionManager {
-    //load questions from file
-    //parse questions into Question objects
-    //filtering fuctionality based on categories
 
     private ArrayList<Question> questions;
 
@@ -27,7 +24,7 @@ public class QuestionManager {
             parseQuestions(lines);
         } catch (Exception e) {
             System.out.println("Error loading questions: " + e.getMessage());
-            this.questions = new ArrayList<>();  // Return an empty list in case of error
+            this.questions = new ArrayList<>();
         }
         return new ArrayList<>(this.questions);
     }

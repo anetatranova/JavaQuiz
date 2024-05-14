@@ -1,0 +1,166 @@
+anet
+2024-05-13T13:25:48.253741
+1
+50.00
+geografie: 1 correct, 1 wrong 
+
+anet
+2024-05-13T13:27:56.956151
+0
+0.00
+matematika: 0 correct, 2 wrong 
+
+anet
+2024-05-13T13:28:10.530742
+1
+50.00
+matematika: 1 correct, 1 wrong 
+
+at
+2024-05-13T13:42:49.981422
+1
+50.00
+matematika: 1 correct, 1 wrong 
+
+at
+2024-05-13T13:43:08.942469
+1
+50.00
+geografie: 1 correct, 1 wrong 
+
+at
+2024-05-13T13:43:34.909182
+0
+0.00
+geografie: 0 correct, 1 wrong 
+matematika: 0 correct, 2 wrong 
+
+at
+2024-05-13T13:53:12.597938
+0
+0.00
+matematika: 0 correct, 2 wrong 
+
+at
+2024-05-13T13:53:34.530845
+2
+100.00
+věda: 2 correct, 0 wrong 
+
+att
+2024-05-13T14:16:52.849550
+1
+50.00
+matematika: 1 correct, 1 wrong 
+
+att
+2024-05-13T14:17:36.389665
+1
+50.00
+věda: 1 correct, 1 wrong 
+
+adam
+2024-05-13T14:31:57.229585
+počet bodů: 1
+úspěšnost: 50.00
+matematika: 1 správně, 1 špatně 
+
+adam
+2024-05-13T14:32:06.587276
+počet bodů: 1
+úspěšnost: 50.00
+věda: 1 správně, 1 špatně 
+
+adam
+2024-05-13T14:32:27.171923
+počet bodů: 1
+úspěšnost: 11.11
+politika: 1 správně, 1 špatně 
+geografie: 0 správně, 3 špatně 
+matematika: 0 správně, 2 špatně 
+věda: 0 správně, 2 špatně 
+
+honza
+2024-05-13T14:48:52.729530
+počet bodů: 2
+úspěšnost: 100.00
+politika: 2 správně, 0 špatně 
+
+honza
+2024-05-13T14:50:07.815896
+počet bodů: 6
+úspěšnost: 66.67
+geografie: 2 správně, 1 špatně 
+politika: 1 správně, 1 špatně 
+matematika: 2 správně, 0 špatně 
+věda: 1 správně, 1 špatně 
+
+tranet
+2024-05-13T14:50:26.179812
+počet bodů: 1
+úspěšnost: 50.00
+matematika: 1 správně, 1 špatně 
+
+tranet
+2024-05-13T14:50:49.492599
+počet bodů: 1
+úspěšnost: 50.00
+politika: 1 správně, 1 špatně 
+
+tranet
+2024-05-13T16:22:43.021202
+počet bodů: 0
+úspěšnost: 0.00 %
+geografie: 0 správně, 2 špatně 
+
+tranet
+2024-05-13T16:23:40.617556
+počet bodů: 9
+úspěšnost: 100.00 %
+geografie: 3 správně, 0 špatně 
+politika: 2 správně, 0 špatně 
+matematika: 2 správně, 0 špatně 
+věda: 2 správně, 0 špatně 
+
+adam
+2024-05-13T16:30:25.245497
+počet bodů: 1
+úspěšnost: 50.00 %
+matematika: 1 správně, 1 špatně 
+
+adam
+2024-05-13T16:39:21.292007
+počet bodů: 0
+úspěšnost: 0.00 %
+věda: 0 správně, 2 špatně 
+
+tranet
+2024-05-13T16:41:35.361126
+počet bodů: 1
+úspěšnost: 50.00 %
+matematika: 1 správně, 1 špatně 
+
+tranet
+2024-05-13T16:51:22.166652
+počet bodů: 0
+úspěšnost: 0.00 %
+matematika: 0 správně, 2 špatně 
+
+tranet
+2024-05-13T16:52:07.615815
+počet bodů: 1
+úspěšnost: 50.00 %
+matematika: 1 správně, 1 špatně 
+
+tranet
+2024-05-13T16:53:43.694127
+počet bodů: 2
+úspěšnost: 100.00 %
+matematika: 2 správně, 0 špatně 
+
+adam
+2024-05-13T16:55:09.422062
+počet bodů: 2
+úspěšnost: 100.00 %
+kategorie 1: 2 správně, 0 špatně 
+

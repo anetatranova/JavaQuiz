@@ -1,42 +1,21 @@
 package cz.cuni.mff.tranova;
 
-import java.io.*;
-import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static cz.cuni.mff.tranova.Game.*;
 
 public class QuizManager {
     private QuestionManager questionManager;
     private CategoryManager categoryManager;
     private UIHelper uiHelper;
+    private User currentUser;
 
-    public QuizManager(QuestionManager questionManager, CategoryManager categoryManager, UIHelper uiHelper) {
+    public QuizManager(QuestionManager questionManager, CategoryManager categoryManager, UIHelper uiHelper, User currentUser) {
         this.questionManager = questionManager;
         this.categoryManager = categoryManager;
         this.uiHelper = uiHelper;
+        this.currentUser = currentUser;
     }
 
-    public void loadQuestions(String filename) throws IOException {
-        InputStream is = getClass().getClassLoader().getResourceAsStream(filename);
-        if (is == null) {
-            // Fallback if file not found in resources, try to load from file system
-            is = new FileInputStream(new File(filename));
-        }
-        Scanner scanner = new Scanner(is);
-        try {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // Process each line to extract questions and answers
-            }
-        } finally {
-            scanner.close();
-            is.close();
-        }
-    }
-
-    public void startQuiz(List<Question> allQuestions) {
+    public void startQuiz(List<Question> allQuestions, String filename) {
         //List<Question> allQuestions = questionManager.loadQuestions("questions.txt");
         categoryManager.processCategories(allQuestions);
         Map<Integer,String> categories = categoryManager.getCategoryIdMap();
@@ -49,26 +28,46 @@ public class QuizManager {
         int numberOfQuestions = uiHelper.getUserQuestionCount(filteredQuestions.size());
         List<Question> questionsToAnswer = pickQuestions(filteredQuestions,numberOfQuestions);
 
-        runQuiz(questionsToAnswer);
+        int score = runQuiz(questionsToAnswer);
+
+        currentUser.updateScores(score);
+
+        Map<String,Integer[]> categoryResults = getCategoryResults(questionsToAnswer);
+        DataWriter.writeQuizResults(currentUser, score, categoryResults, filename);
     }
+
 
     private List<Question> pickQuestions(List<Question> questions, int count) {
         Collections.shuffle(questions);
         return questions.subList(0, count);
     }
 
-    private void runQuiz(List<Question> questions) {
+    private Map<String, Integer[]> getCategoryResults(List<Question> questions) {
+        Map<String, Integer[]> results = new HashMap<>();
+        for (Question question : questions) {
+            String category = question.getCategory();
+            Integer[] counts = results.getOrDefault(category, new Integer[]{0, 0});
+            if (question.isCorrect()) {
+                counts[0]++;
+            } else {
+                counts[1]++;
+            }
+            results.put(category, counts);
+        }
+        return results;
+    }
+
+    private int runQuiz(List<Question> questions) {
         int correctCount = 0;
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
             uiHelper.displayQuestionAndOptions(question, i + 1, questions.size());
             String userAnswerLabel = uiHelper.getValidAnswerFromUser(question.getAnswers().size());
 
-            // Obtain the correct index of the user's answer based on the label
             int userAnswerIndex = UIHelper.generateAnswerLabels(question.getAnswers().size()).indexOf(userAnswerLabel);
 
-            // Retrieve the user's selected answer using the index
             String userSelectedAnswer = question.getAnswers().get(userAnswerIndex);
+            question.setUserAnswer(userSelectedAnswer);
 
             if (userSelectedAnswer.equalsIgnoreCase(question.getRightAnswer())) {
                 correctCount++;
@@ -78,8 +77,10 @@ public class QuizManager {
             }
         }
         uiHelper.displayFinalScore(correctCount, questions.size());
-    }
 
+        //currentUser.updateScores(correctCount);
+        return correctCount;
+    }
 }
 
 
