@@ -8,8 +8,6 @@ public class User {
     private int highestScore;
     private int totalQuizzesTaken;
     private double averageScore;
-    //private String highestScoringCategory;
-    //private int totalScore;
 
     /**
      * Konstruktory pro nového uživatele s danou přezdívkou a inicializuje hodnoty související se skórem na 0
@@ -22,8 +20,6 @@ public class User {
         this.highestScore = 0;
         this.totalQuizzesTaken = 0;
         this.averageScore = 0.0;
-        //this.highestScoringCategory ="";
-        //this.totalScore = 0;
     }
 
     /**

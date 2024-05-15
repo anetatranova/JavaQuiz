@@ -6,7 +6,6 @@ import java.util.*;
  * Tato třída organizuje flow kvízu - od výběru kategorií a otázek až k výpočtu skóre a zápisu výsledků
  */
 
-
 public class QuizManager {
     private QuestionManager questionManager;
     private CategoryManager categoryManager;

@@ -20,7 +20,7 @@ public class Question {
      * @param wrongAnswers senznam nesprávných odpovědí
      */
     public Question(String category, String text, String rightAnswer, List<String> wrongAnswers){
-        //konstruktry
+
         this.category = category;
         this.text = text;
         this.rightAnswer = rightAnswer;

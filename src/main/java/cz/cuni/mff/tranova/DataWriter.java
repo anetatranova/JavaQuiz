@@ -38,7 +38,7 @@ public class DataWriter {
 
         try {
             Files.write(Paths.get(QUIZ_RESULTS_FILE),
-                    (result.toString() + "\n").getBytes(),
+                    (result + "\n").getBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         } catch (IOException e) {
             System.out.println("Chyba při psaní do souboru quiz_results.txt: " + e.getMessage());

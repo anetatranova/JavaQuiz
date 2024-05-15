@@ -50,7 +50,7 @@ public class Game {
             currentUser = loadedUser;
             System.out.println("Byly nalezena existující data pro " + username + ".");
         } else {
-            currentUser = new User(username);  // Create a new user if no data found
+            currentUser = new User(username);
             System.out.println("Byla načtena nová přezdívka " + username + ".");
         }
     }
@@ -134,7 +134,7 @@ public class Game {
     }
 
     /**
-     * Pokusí se načíst data uživatele s danou přezdívkou ze souboru
+     * Pokusí se načíst data uživatele s danou přezdívkou ze souboru (jde od konce souboru)
      *
      * @param username přezdívka, pro kterou data načíst
      * @return User s načtenými data čí null pokud aková přezdívka nebyla nalezena
@@ -147,9 +147,9 @@ public class Game {
             List<String> lines = Files.readAllLines(path);
             User lastFoundUser = null;
 
-            for (int i = lines.size() - 4; i >= 0; i--) {
-                if (lines.get(i).trim().equals(username)) {
-                    if (i + 3 < lines.size()) {
+            for (int i = lines.size() - 4; i >= 0; i--) {       //kazdy blok je dlouhy 4 radky
+                if (lines.get(i).trim().equals(username)) {     // username matchuje
+                    if (i + 3 < lines.size()) {                 //next 3 lines kde je hledane info
                         lastFoundUser = parseUserStatistics(lines.subList(i, i + 4));
                         break;
                     }
@@ -178,9 +178,11 @@ public class Game {
     private static User parseUserStatistics(List<String> userBlock) {
         String username = userBlock.get(0).trim();
         User user = new User(username);
+
         user.setTotalQuizzesTaken(Integer.parseInt(userBlock.get(1).split(": ")[1].trim()));
         user.setHighestScore(Integer.parseInt(userBlock.get(2).split(": ")[1].trim()));
         user.setAverageScore(Double.parseDouble(userBlock.get(3).split(": ")[1].trim()));
+
         return user;
     }
 }
