@@ -164,3 +164,59 @@ počet bodů: 2
 úspěšnost: 100.00 %
 kategorie 1: 2 správně, 0 špatně 
 
+anet
+2024-05-15T10:01:21.386970
+název souboru: questions.txt
+počet bodů: 1
+úspěšnost: 33.33 %
+matematika: 1 správně, 2 špatně 
+
+anet
+2024-05-15T10:03:00.365664
+název souboru: questions.txt
+počet bodů: 3
+úspěšnost: 100.00 %
+neurologie: 3 správně, 0 špatně 
+
+at
+2024-05-15T10:25:31.680274
+název souboru: questions.txt
+počet bodů: 0
+úspěšnost: 0.00 %
+fyzika: 0 správně, 2 špatně 
+
+at
+2024-05-15T10:27:02.295189
+název souboru: questions.txt
+počet bodů: 2
+úspěšnost: 100.00 %
+fyzika: 2 správně, 0 špatně 
+
+at
+2024-05-15T10:28:25.545733
+název souboru: vzor.txt
+počet bodů: 1
+úspěšnost: 50.00 %
+kategorie 2: 1 správně, 1 špatně 
+
+anet
+2024-05-15T10:35:05.247268
+název souboru: vzor.txt
+počet bodů: 1
+úspěšnost: 50.00 %
+kategorie 2: 1 správně, 1 špatně 
+
+at
+2024-05-15T10:38:29.770562
+název souboru: questions.txt
+počet bodů: 3
+úspěšnost: 75.00 %
+fyzika: 3 správně, 1 špatně 
+
+at
+2024-05-15T10:38:58.774244
+název souboru: vzor.txt
+počet bodů: 0
+úspěšnost: 0.00 %
+kategorie 2: 0 správně, 2 špatně 
+

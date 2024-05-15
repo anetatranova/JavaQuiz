@@ -2,12 +2,28 @@ package cz.cuni.mff.tranova;
 
 import java.util.*;
 
+/**
+ * Spravuje uživatelské rozhraní jako výčet kategorií a otázek a zachycuje uživatelský vstup, který dál zpracovávát
+ * Tato třída přímo iteraguje s uživatelem a organizuje je tak vstupy a výstupy programu
+ */
+
 public class UIHelper {
-    private Scanner scanner;
+    private static Scanner scanner;
+
+    /**
+     * Inicializuje novou instanci UIHelper se Scanner objektem
+     */
 
     public UIHelper() {
         this.scanner = new Scanner(System.in);
     }
+
+    /**
+     * ZObrazuje dostupné kvízové kategorie
+     *
+     * @param categories mapa s číselným identifikétorem a kategorie
+     * @param categoryManager pomocná třída pro práci s kategoriemi, použita pro získání počtu otázek
+     */
 
     public void showCategories(Map<Integer, String> categories, CategoryManager categoryManager) {
         System.out.println(" \n Vyber kategorii/e, číslem 0 vybereš všechny.");
@@ -16,6 +32,13 @@ public class UIHelper {
             System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " otázek)");
         }
     }
+
+    /**
+     * Zachycuje výběr kategorie
+     *
+     * @param categories mapa s číselným identifikétorem a kategorie
+     * @return seznam jmen vybraných kategorií
+     */
 
     public List<String> getUserCategorySelections(Map<Integer, String> categories) {
         List<String> selections = new ArrayList<>();
@@ -27,7 +50,6 @@ public class UIHelper {
                 for (String part : parts) {
                     int selection = Integer.parseInt(part);
                     if (selection == 0) {
-                        // If user enters '0', select all categories
                         selections.addAll(categories.values());
                         valid = true;
                         break;
@@ -50,33 +72,61 @@ public class UIHelper {
         return selections;
     }
 
+    /**
+     * Zeptá se chtěný počet otázek v kvízu
+     *
+     * @param maxQuestions maximální počet otázek
+     * @return počet otázek na které chce uživatek odpovědět
+     */
+
     public int getUserQuestionCount(int maxQuestions) {
         System.out.println("Kolik otázek v kvízu chceš? (max " + maxQuestions + ")");
-        while (true) {
-            try {
-                int count = Integer.parseInt(scanner.nextLine());
-                if (count >= 1 && count <= maxQuestions) {
-                    return count;
-                } else {
-                    System.out.println("Vyber číslo v rozmezí 1 do " + maxQuestions + ".");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Musíš vybrat pouze číslo.");
-            }
-        }
+        return getValidChoice(1, maxQuestions);
     }
+
+    /**
+     * Zobrazí konečné skóre na konci kvízu
+     *
+     * @param score získané skóre
+     * @param totalQuestions celkový počet otázke, na které uživatel odpovíděl
+     */
 
     public void displayFinalScore(int score, int totalQuestions) {
         System.out.println("Kvíz jsi dokončil se skórem " + score + " z " + totalQuestions + ".");
     }
 
+    /**
+     * Zobrazí otázku a její odpovědi
+     *
+     * @param question otázka k zobrazení
+     * @param questionNumber kolikátá otázka je zobrazena
+     * @param totalQuestions celkový počet otázke, na které uživatel odpovídá
+     */
+
     public void displayQuestionAndOptions(Question question, int questionNumber, int totalQuestions) {
-        System.out.println("Otázka " + questionNumber + " z " + totalQuestions + ": " + question.getText());
+        System.out.println("Otázka " + questionNumber + " z " + totalQuestions + ": ");
+        for (String line : wrapText(question.getText(), 80)) {  // Assuming a maximum width of 80 characters
+            System.out.println(line);
+        }
         List<String> labels = generateAnswerLabels(question.getAnswers().size());
-        for (int i = 0; i < question.getAnswers().size(); i++) {
-            System.out.println(labels.get(i) + ". " + question.getAnswers().get(i));
+        int labelIndex = 0;
+        for (String answer : question.getAnswers()) {
+            List<String> wrappedAnswer = wrapText(answer, 80);
+            if (!wrappedAnswer.isEmpty()) {
+                System.out.println(labels.get(labelIndex++) + ". " + wrappedAnswer.get(0));
+                for (int i = 1; i < wrappedAnswer.size(); i++) {
+                    System.out.println("   " + wrappedAnswer.get(i)); // Indent continuation lines for clarity
+                }
+            }
         }
     }
+
+    /**
+     * Zajišťuje, že uživatel odpovídá validně
+     *
+     * @param optionsSize počet možností
+     * @return validní odpověď vybraná uživatelem
+     */
 
     public String getValidAnswerFromUser(int optionsSize) {
         List<String> validAnswers = generateAnswerLabels(optionsSize);
@@ -90,28 +140,97 @@ public class UIHelper {
         }
     }
 
+    /**
+     * Pomocná metoda pro zajištění správného výběru čísla
+     *
+     * @param min spodní hranice
+     * @param max horní hranice
+     * @return validní odpověď vybraná užiavtelem
+     */
+
+    static int getValidChoice(int min, int max){
+        while (true){
+            try {
+                int input = Integer.parseInt(scanner.nextLine().trim());
+                if (input >= min && input <= max){
+                    return input;
+                }
+                else{
+                    System.out.println("Zadej číslo v rozmezí od "+ min + "do " + max);
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Špatný vstup, zadej platný číselný vstup");
+            }
+        }
+    }
+
+    /**
+     * Generuje písmena pro odpovědi, pro odpovědi delší než 26 generuje AA,AB,AC, ...
+     *
+     * @param numberOfAnswers The number of answers that need labels.
+     * @return A list of labels for the answers.
+     */
+
     public static List<String> generateAnswerLabels(int numberOfAnswers) {
         List<String> labels = new ArrayList<>();
         int firstLetter = 'A';
-        int range = 26;  // Number of letters in the alphabet
 
         for (int i = 0; i < numberOfAnswers; i++) {
-            int firstCharNum = i / range;
-            int secondCharNum = i % range;
+            int firstCharNum = i / 26;                  //kolikate kolo
+            int secondCharNum = i % 26;                 //kolikate pismeno
+
             StringBuilder label = new StringBuilder();
-            if (firstCharNum > 0) {
-                label.append((char) (firstLetter + firstCharNum - 1));
+
+            if (firstCharNum > 0) {                     //pokud je pocet vyssi nez 26
+                label.append((char)(firstLetter + firstCharNum - 1));
             }
-            label.append((char) (firstLetter + secondCharNum));
+            label.append((char)(firstLetter+ secondCharNum));
             labels.add(label.toString());
         }
         return labels;
     }
 
+    /**
+     * Zobrazí statistické výsledky
+     *
+     * @param user přezdívka pro kterou informace ukázat
+     */
+
     public void displayUserStatistics(User user) {
-        System.out.println("Statistics for " + user.getUsername() + ":");
-        System.out.println("Highest Score: " + user.getHighestScore());
-        System.out.println("Total Quizzes Taken: " + user.getQuizzesTaken());
-        System.out.println("Average Score: " + user.getAverageScore());
+        System.out.println("Statistika " + user.getUsername() + ":");
+        System.out.println("Nejvyšší dosažené skóre: " + user.getHighestScore());
+        System.out.println("Počet dokončených kvízu: " + user.getQuizzesTaken());
+        System.out.println("Průměrné skóre: " + user.getAverageScore());
+    }
+
+    /**
+     * Zarovná text do bloku podel dané délky
+     *
+     * @param text text, který zarovnat
+     * @param maxWidth maximíální počet znakůna řádku
+     * @return list stringů, kde každý string reprezentuje jeden řádek
+     */
+    public List<String> wrapText(String text, int maxWidth) {
+        List<String> lines = new ArrayList<>();
+        String[] words = text.split(" ");
+        StringBuilder currentLine = new StringBuilder();
+
+        for (String word : words) {
+            if (currentLine.length() + word.length() > maxWidth) {
+                lines.add(currentLine.toString());
+                currentLine = new StringBuilder();
+            }
+            if (!currentLine.isEmpty()) {
+                currentLine.append(" ");
+            }
+            currentLine.append(word);
+        }
+
+
+        if (!currentLine.isEmpty()) {
+            lines.add(currentLine.toString());
+        }
+
+        return lines;
     }
 }

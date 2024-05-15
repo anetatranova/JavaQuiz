@@ -9,7 +9,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
+/**
+ * Třída spravuje hlavní game loop a část interakce s uživatelem (hlavně co se týče přezdívky)
+ * Spravuje vstup, quiz flow a podle výběru uživatele zřizuje akce, které provést dál
+ * Dovoluje uživateli kvíz začít, změnit kvízový soubor nebo přezdívku, či kouknout na statistiku pro danou přezdívku
+ */
 public class Game {
 
     private static Scanner scanner = new Scanner(System.in);
@@ -19,7 +23,15 @@ public class Game {
     private static final UIHelper uiHelper = new UIHelper();
     private static String filename = "questions.txt";
 
+    /**
+     * Inicializuje kvíz
+     *
+     * @param args zde může být cesta ke kvízovému souboru
+     */
     public static void main(String[] args) {
+        if (args.length > 0){
+            filename = args[0];
+        }
         initialize();
         boolean continueRunning = true;
         while (continueRunning) {
@@ -27,27 +39,39 @@ public class Game {
             continueRunning = handlePostQuizOptions();
         }
     }
-
+    /**
+     * inicializuje kvíz otázkou uživatele na přezdívku
+     */
     private static void initialize(){
         System.out.println("zadej přezdívku: ");
         String username = scanner.nextLine().trim();
         User loadedUser = loadUserDataIfExists(username);
         if (loadedUser != null) {
             currentUser = loadedUser;
-            System.out.println("Existing data loaded for " + username + ".");
+            System.out.println("Byly nalezena existující data pro " + username + ".");
         } else {
             currentUser = new User(username);  // Create a new user if no data found
-            System.out.println("New user profile created for " + username + ".");
+            System.out.println("Byla načtena nová přezdívka " + username + ".");
         }
     }
+
+    /**
+     * Spustí jedno kolo kvízu
+     */
 
     private static void runQuizCycle(){
         List<Question> allQuestions = questionManager.loadQuestions(filename);
         QuizManager quizManager = new QuizManager(questionManager,categoryManager, uiHelper, currentUser);
-        quizManager.startQuiz(allQuestions, filename);
+        quizManager.startQuiz(allQuestions,filename);
         //currentUser.updateScores(score);
         DataWriter.writeUserStatistics(currentUser);
     }
+
+    /**
+     * Po jednom kole kvízu dá uživateli na výběr následující akci
+     *
+     * @return boolean True pokud má v kvízu pokračovat, False pokud ne (break aby opět vypsal tyto možnosti)
+     */
 
     private static boolean handlePostQuizOptions(){
         while (true) {
@@ -58,7 +82,7 @@ public class Game {
             System.out.println("4. Podívat se na statistiky");
             System.out.println("5. Ukončit program");
 
-            int choice = getValidChoice(1, 5);
+            int choice = uiHelper.getValidChoice(1,5);
 
             switch (choice) {
                 case 1:
@@ -84,27 +108,18 @@ public class Game {
         //continue unless the user choosesto exit
     }
 
-    private  static int getValidChoice(int min, int max){
-        while (true){
-            try {
-                int input = Integer.parseInt(scanner.nextLine().trim());
-                if (input >= min && input <= max){
-                    return input;
-                }
-                else{
-                    System.out.println("Zadej číslo v rozmezí od "+ min + "do " + max);
-                }
-            } catch (NumberFormatException e){
-                System.out.println("Špatný vstup, zadej platný vstup");
-            }
-        }
-    }
+    /**
+     * Vyžádá si název nového kvízového souboru od uživatele
+     */
 
     private static void loadNewQuizFile(){
         System.out.println("Zadej jméno souboru s otázkama: ");
-        filename = scanner.nextLine().trim();
+        filename= scanner.nextLine().trim();
     }
 
+    /**
+     * Změní přezdívku aktuálního uživatele a pokusí se načíst existující data pro danou přezdívku
+     */
     private static void changeUsername() {
         System.out.println("Zadej novou přezdívku: ");
         String newUsername = scanner.nextLine().trim();
@@ -117,6 +132,14 @@ public class Game {
             System.out.println("Přezdívka změněna na " + newUsername);
         }
     }
+
+    /**
+     * Pokusí se načíst data uživatele s danou přezdívkou ze souboru
+     *
+     * @param username přezdívka, pro kterou data načíst
+     * @return User s načtenými data čí null pokud aková přezdívka nebyla nalezena
+     */
+
 
     private static User loadUserDataIfExists(String username) {
         Path path = Paths.get(DataWriter.USER_STATS_FILE);
@@ -138,6 +161,19 @@ public class Game {
             return null;
         }
     }
+    /**
+     * Zparsuje statistické informace uživatele z bloku textu souboru a vytvoří User objekt
+     * Tato metoda předpokládá, že useBlock list má pravidelný formát:
+     * - První řádek obsahuje přezdívku
+     * - Druhý řádek obsauje celkový počet kvízů, které byly dokončeny pod danou přezdívkou
+     * - Třetí řádek obsahuje nejvyšší dosažené skóre
+     * - Čtvrtý řádek obsahuje průměrné skóre
+     *
+     * @param userBlock list stringů, kde každý reprezentuje řádek dat
+     * @return User se zparsovanými daty z posledního kola
+     * @throws NumberFormatException pokud parsování čísel neproběhne v pořádku
+     * @throws IndexOutOfBoundsException pokud userBlock obsahuje méně než čtyři stringy
+     */
 
     private static User parseUserStatistics(List<String> userBlock) {
         String username = userBlock.get(0).trim();

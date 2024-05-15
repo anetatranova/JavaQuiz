@@ -1,0 +1,52 @@
+kategorie 1
+otazka
+spravna
+spatna
+spatna
+
+kategorie 2
+otazka
+spravna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+spatna
+
+kategorie 1
+otazka
+spravna
+spatna
+spatne
+spatna
+
+kategorie 2
+otazka
+spravne
+velmi dlouha odpoved, velmi dlouha odpoved, velmi dlouha odpoved, velmi dlouha odpoved, velmi dlouha odpoved
+spatne
+spatne
+spatne

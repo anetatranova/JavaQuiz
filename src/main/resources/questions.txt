@@ -1,97 +1,148 @@
 matematika
-Kolik je 4x4?
-16
-4
-18
-24
-
-geografie
-Kolik metrů měří nejvyšší hora na světě?
-8848
-8756
-8801
-8954
-
-politika
-Kdo je současným prezidentem USA?
-Joe Biden
-Barack Obama
-George W. Bush
-Bill Clinton
-
-věda
-Co je chemický prvek s označením H?
-vodík
-helium
-hafnium
-hassium
-
-politika
-Která země v EU je největší podle počtu obyvatel?
-Německo
-Francie
-Itálie
-Španělsko
-Polsko
-
-geografie
-Jaký je největší ostrov na světě?
-Grónsko
-Nová Guinea
-Borneo
-Madagaskar
-
-věda
-Jaký prvek má největší zastoupení v atmosféře na Zemi?
-dusík
-kyslík
-argon
-vodík
-
-geografie
-Jaké je největší jezero na světě?
-Kaspické moře
-Viktoriino jezero
-Huronské jezero
-Bajkalské jezero
-Mrtvé moře
-
-matematika
 Kolik je 3x4?
 12
 5
 7
-0
+10
 90
 6
-2
-3
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
-2
+20
+18
+8
+0
+16
 22
- 2
- 2
- 22
-  2
-  2
- 2
+
+fyzika
+Mějme výtahy A a B. Výtah A se pohybuje rovnoměrně zrychleným pohybem se zrychlením 0,500 m·s−2 směrem nahoru a výtah B se pohybuje rovnoměrně zrychleným pohybem se zrychlením 0,500 m·s−2 směrem dolů. Ve výšce 1,5 m nad podlahou v každém z obou výtahů pustíme míček s nulovou počáteční rychlostí vůči výtahu. Tření zanedbáme. Jak dlouhá je doba pádu míčku ve výtahu B po zaokrouhlení na dvě desetinná místa?
+1,05 delší než ve výtahu A
+1,20 delší než ve výtahu A
+1,05 kratší než ve výtahu B
+1,20 kratší než ve výtahu B
+
+fyzika
+Osel táhne vozík o hmotnosti 150 kg tak, že tažná síla o velikosti 800 N svírá úhel 30° s vodorovným směrem. Za předpokladu, že vozík se pohybuje rovnoměrně přímočaře a rychlost vozíku je v = 1 m·s^−1, jaký je výkon osla?
+693 W
+584 W
+752 W
+
+fyzika
+Částice s hmotností m a nábojem q vletí do homogenního magnetického pole kolmo k indukčním čarám rychlostí o velikosti v. Velikost vektoru magnetické indukce je B, doba oběhu částice po kruhové dráze je:
+nepřímo úměrná náboji částice
+přímo úměrná náboji částice
+
+fyzika
+Lupa má ohniskovou vzdálenost 10 cm. Biolog pozoruje brouka, který se nachází 11 cm před lupou. Oko,lupa a brouk jsou na jedné polopřímce. Úhlové zvětšení je:
++2,5
++3
++1,5
++1,75
++2,25
+
+matematika
+Jaký je výsledek výrazu 5x−3=2x+9?
+x = 4
+x = 8
+x = 5
+x = 6
+x = 2
+x = 3
+
+matematika
+Jaký je výsledek výrazu 3(x+4) = 18
+x = 2
+x = 1
+x = 4
+x = 5
+x = 3
+
+neurologie
+Která část mozku je zodpovědná za koordinaci pohybů?
+Mozeček (Cerebellum)
+Mozkový kmen (Brainstem)
+Hypotalamus (Hypothalamus)
+Čelní lalok (Frontal lobe)
+
+neurologie
+Co je hlavní funkcí hypotalamu?
+Regulace tělesné teploty a hormonální rovnováhy
+Koordinace dobrovolných pohybů
+Zpracování zrakových informací
+Ukládání dlouhodobé paměti
+
+neurologie
+Který nerv je největší a nejdelší v lidském těle?
+Ischiatický nerv (Sciatic nerve)
+Vagus nerv (Vagus nerve)
+Okulomotorický nerv (Oculomotor nerve)
+Trojklanný nerv (Trigeminal nerve)
+
+neurologie
+Co je hlavní funkcí myelinu?
+Izolace nervových vláken a zrychlení přenosu nervových impulzů
+Produkce cerebrospinální tekutiny
+Ochrana mozku před zraněními
+Kontrola svalových kontrakcí
+
+neurologie
+Který z následujících nervů je kraniální nerv?
+Vagus nerv (Vagus nerve)
+Ischiatický nerv (Sciatic nerve)
+Mediální nerv (Median nerve)
+Peroneální nerv (Peroneal nerve)
+
+neurologie
+Co je hlavní příčinou Alzheimerovy choroby?
+Hromadění beta-amyloidových plaků a neurofibrilárních změn
+Infekce mozku bakterií
+Trauma hlavy
+Genetická mutace v myelinových proteinech
+
+bioinformatika
+Co je hlavní funkcí softwaru Clustal Omega?
+Zarovnání více sekvencí
+Predikce sekundární struktury proteinů
+Analýza fylogenetických stromů
+Simulace molekulární dynamiky
+
+bioinformatika
+Co je motiv v kontextu bioinformatiky?
+Krátká konzervovaná sekvence v DNA nebo proteinech s funkčním významem
+Celková struktura proteinů
+Sekvenční variace v genomu
+Signální dráha v buňce
+
+bioinformatika
+Který algoritmus se používá pro lokální zarovnání sekvencí?
+Smith-Waterman
+Needleman-Wunsch
+Clustal Omega
+T-Coffee
+
+bioinformatika
+Co je E-value v kontextu algoritmů pro vyhledávání v sekvenčních databázích, jako je BLAST?
+Počet hitů, které dostanu náhodou
+Pravděpodobnost, že sekvence jsou si příbuzné
+Počet mutací potřebných k transformaci jedné sekvence na druhou
+Pravděpodobnost, že dvě sekvence mají stejnou funkci
+
+vývojová biologie
+Co je zygota?
+První buňka vzniklá splynutím vajíčka a spermie
+Typ pohlavní buňky
+Buňka ve stádiu blastuly
+Specializovaná buňka v dospělém organismu
+
+vývojová biologie
+Co je gastrulace?
+Proces, kdy se z jednovrstvového embrya stává embryo s více vrstvami
+Proces, kdy buňky začínají tvořit orgány
+Fáze, kdy se zygota dělí na více buněk
+Fáze, kdy se embryo implantuje do děložní stěny
+
+vývojová biologie
+Co je morfogeneze?
+Proces, kterým se formuje tvar a struktura organismu
+Proces, kterým buňky podléhají apoptóze
+Proces, kterým buňky migrují do nové oblasti
+Proces, kterým se buňky stávají totipotentními
