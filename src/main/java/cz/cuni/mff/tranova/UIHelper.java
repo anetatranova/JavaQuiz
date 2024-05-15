@@ -197,7 +197,7 @@ public class UIHelper {
      */
 
     public void displayUserStatistics(User user) {
-        System.out.println("Statistika " + user.getUsername() + ":");
+        System.out.println("\nStatistika " + user.getUsername() + ":");
         System.out.println("Nejvyšší dosažené skóre: " + user.getHighestScore());
         System.out.println("Počet dokončených kvízu: " + user.getQuizzesTaken());
         System.out.println("Průměrné skóre: " + user.getAverageScore());
