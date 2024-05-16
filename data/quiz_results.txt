@@ -1,0 +1,70 @@
+aneta
+2024-05-15T15:54:16.725010
+název souboru: questions.txt
+počet bodů: 5
+úspěšnost: 71.43 %
+matematika: 2 správně, 0 špatně 
+neurologie: 3 správně, 2 špatně 
+
+aneta
+2024-05-15T15:55:25.179144
+název souboru: questions.txt
+počet bodů: 4
+úspěšnost: 100.00 %
+bioinformatika: 2 správně, 0 špatně 
+matematika: 1 správně, 0 špatně 
+neurologie: 1 správně, 0 špatně 
+
+anna
+2024-05-15T15:56:24.880160
+název souboru: vzor.txt
+počet bodů: 3
+úspěšnost: 75.00 %
+kategorie 2: 1 správně, 1 špatně 
+kategorie 1: 2 správně, 0 špatně 
+
+anna
+2024-05-15T15:58:04.699656
+název souboru: questions.txt
+počet bodů: 3
+úspěšnost: 100.00 %
+vývojová biologie: 3 správně, 0 špatně 
+
+anna
+2024-05-15T16:03:41.188724
+název souboru: questions.txt
+počet bodů: 2
+úspěšnost: 100.00 %
+neurologie: 2 správně, 0 špatně 
+
+adam
+2024-05-15T16:09:25.240739
+název souboru: questions.txt
+počet bodů: 1
+úspěšnost: 100.00 %
+fyzika: 1 správně, 0 špatně 
+
+aneta
+2024-05-15T16:10:48.840109
+název souboru: questions.txt
+počet bodů: 3
+úspěšnost: 75.00 %
+vývojová biologie: 1 správně, 0 špatně 
+bioinformatika: 1 správně, 0 špatně 
+matematika: 0 správně, 1 špatně 
+neurologie: 1 správně, 0 špatně 
+
+adam
+2024-05-15T16:12:09.364831
+název souboru: questions.txt
+počet bodů: 2
+úspěšnost: 50.00 %
+fyzika: 2 správně, 2 špatně 
+
+aneta
+2024-05-16T21:20:39.346707
+název souboru: questions.txt
+počet bodů: 3
+úspěšnost: 100.00 %
+bioinformatika: 3 správně, 0 špatně 
+
