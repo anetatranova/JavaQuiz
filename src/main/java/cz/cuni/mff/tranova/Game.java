@@ -43,7 +43,8 @@ public class Game {
      * inicializuje kvíz otázkou uživatele na přezdívku
      */
     private static void initialize(){
-        System.out.println("zadej přezdívku: ");
+        System.out.println("\nJavaQuiz program spuštěn.");
+        System.out.println("\nZadej přezdívku: ");
         String username = scanner.nextLine().trim();
         User loadedUser = loadUserDataIfExists(username);
         if (loadedUser != null) {
