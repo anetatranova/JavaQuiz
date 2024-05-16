@@ -18,7 +18,8 @@ Toto je kvízová aplikace implementvaná v jazyce Java (a sestavená s Mavenem)
       mvn clean install
    ```
 3. Spuštění aplikace
-   Při použití následujícího příkazu se aplikace spustí s výchozím kvízovým souborem "questions.txt".
+
+   Při použití následujícího příkazu se aplikace spustí s výchozím kvízovým souborem `questions.txt`.
    ```ruby
       mvn exec:java
    ```
@@ -27,7 +28,7 @@ Toto je kvízová aplikace implementvaná v jazyce Java (a sestavená s Mavenem)
       mvn exec:java -Dexec.args="cesta/k/souboru/s_otázkami.txt"
    ```
 ## Přidání nového souboru s otázkami
-Nové soubory s otázkami by měly být přidány do složky "resources". Pokud uživatel během hry bude chtít změnit soubor otázek, lze tak učinit po dokončení kvízu při volbě "4. Podívat se na statistiky.", kde pak stačí zadat pouze název souboru.
+Nové soubory s otázkami by měly být přidány do složky `./src/main/resources`. Pokud uživatel během hry bude chtít změnit soubor otázek, lze tak učinit po dokončení kvízu při volbě "4. Podívat se na statistiky.", kde pak stačí zadat pouze název souboru.
 
 ### Formát souboru
 Soubor s otázkami by měl mít následující formát
@@ -51,7 +52,7 @@ prázdný řádek
 Po spuštění aplikace je uživatel vyzván k zadání své přezdívky pod kterou bude odpovídat na kvízové otázky. Tato přezdívka bude použita pro sledování skóre a statistik. Přezdívku jde použít opakovaně i po skončení a znovuspuštění programu (program pozná, zda byla přezdívka použita a případně nahraje data z minulého kvízu).
 
 ### Výběr kategorií a počtu otázek
-Po zadání přezdívky se zobrazí seznam kategorii s počty otázek. Uživatel si může vybrat jednu i více kategorií (oddělených mezerou), číslem 0 jsou vybrány všechny kategorie. Po zadání kategorií si uzživatel vybere počet otázek, na které chce odpovědět. Následně se mu zobrazí požadovaný počet otázek z vybraných kategorií.
+Po zadání přezdívky se zobrazí seznam kategorii s počty otázek. Uživatel si může vybrat jednu i více kategorií (oddělených mezerou), číslem 0 jsou vybrány všechny kategorie. Po zadání kategorií si uživatel vybere počet otázek, na které chce odpovědět. Následně se mu zobrazí požadovaný počet otázek z vybraných kategorií.
 
 ### Možnosti po kvízu
 Po dokončení kvízu se zobrazí následující možnosti:
@@ -59,7 +60,7 @@ Po dokončení kvízu se zobrazí následující možnosti:
 1. Pokračovat ve stejném souboru s kvízem.
    - uživateli bude zobrazena stejná nabídka kategorií jako předtím
 2. Načíst nový soubor s otázkama.
-   - následně bude uživatel vyzván k zadání názvu souboru, soubor by měl být uložen ve složce "resources"
+   - následně bude uživatel vyzván k zadání názvu souboru, soubor by měl být uložen ve složce `./src/main/resources`
 3. Změnit přezdívku.
    - po změně přezdívky se opět zobrazí tyto možnosti
 4. Podívat se na statistiky.
@@ -70,7 +71,7 @@ Po dokončení kvízu se zobrazí následující možnosti:
 ## Soubory s výsledky kvízu a statistiky
 
 ### Soubor s výsledky kvízu
-Výsledky kvízu jsou uloženy v ./data/quiz_results.txt. Každý záznam o kvízu obsahuje přezdívku, timestamp, název kvízového souboru, skóre, úspěšnost a podrobné výsledky kategorií.
+Výsledky kvízu jsou uloženy v `./data/quiz_results.txt`. Každý záznam o kvízu obsahuje přezdívku, timestamp, název kvízového souboru, skóre, úspěšnost a podrobné výsledky kategorií.
 
 ### Soubor se statistikami
-Průběžné statistiky jsou zaznamenávány v ./data/user_statistics.txt. Tento soubor obsahuje údaje jako jsou celkový počet dokončených kvízů, nejvyšší dosažené skóre a průměrné skóre.
+Průběžné statistiky jsou zaznamenávány v `./data/user_statistics.txt`. Tento soubor obsahuje údaje jako jsou celkový počet dokončených kvízů, nejvyšší dosažené skóre a průměrné skóre.
