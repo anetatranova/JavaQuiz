@@ -27,8 +27,9 @@ public class Game {
      * Inicializuje kvíz
      *
      * @param args zde může být cesta ke kvízovému souboru
+     * @throws IOException pokud nastane chyba při zápisu do souboru
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length > 0){
             filename = args[0];
         }
@@ -58,9 +59,11 @@ public class Game {
 
     /**
      * Spustí jedno kolo kvízu
+     *
+     * @throws IOException pokud nastane chyba při zápisu statistik do souboru
      */
 
-    private static void runQuizCycle(){
+    private static void runQuizCycle() throws IOException {
         List<Question> allQuestions = questionManager.loadQuestions(filename);
         QuizManager quizManager = new QuizManager(questionManager,categoryManager, uiHelper, currentUser);
         quizManager.startQuiz(allQuestions,filename);

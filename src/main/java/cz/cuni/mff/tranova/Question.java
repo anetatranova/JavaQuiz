@@ -5,9 +5,23 @@ import java.util.*;
  * Tato třída reprezentuje jednu otázku - obsahuje kategorii, otázku, správnou odpověď a ostatní odpovědi
  */
 public class Question {
+
+    /**
+     * Kategorie otázky
+     */
     public String category;
+
+    /**
+     * Text otázky
+     */
     public String text;
+    /**
+     * Správná odpověď
+     */
     public String rightAnswer;
+    /**
+     * Seznam všech odpovědí
+     */
     public List<String> answers;
     private String userAnswer;
     /**
@@ -62,7 +76,7 @@ public class Question {
         return this.answers;
     }
     /**
-     * nastaví odpověď uživatele
+     * Nastaví odpověď uživatele
      *
      * @param userAnswer odpověď uživatele
      */
@@ -70,7 +84,7 @@ public class Question {
         this.userAnswer = userAnswer;
     }
     /**
-     * Zkontruleje jestli je odpověď uživatele správná
+     * Zkontroluje jestli je odpověď uživatele správná
      *
      * @return True pokud je odpověď správná, False pokud ne
      */

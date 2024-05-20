@@ -10,7 +10,13 @@ import java.util.Map;
  * Tato třída obsahuje metody pro psaní výsledků kvízu a statistických informací do souborů
  */
 public class DataWriter {
+    /**
+     * Cesta k souboru s výsledky kvízu, tento soubor obsahuje podrobné záznamy o výsledcích každého kvízu
+     */
     public static final String QUIZ_RESULTS_FILE = "./data/quiz_results.txt";
+    /**
+     * Cesta k souboru se statistikami uživatelů, tento soubor obsahuje souhrnné statistiky o výkonech všech uživatelů
+     */
     public static final String USER_STATS_FILE = "./data/user_statistics.txt";
     /**
      * Zapisuje výsledky kvízu uživatele do textového souboru
@@ -23,7 +29,7 @@ public class DataWriter {
      * @param filename název kvízového souboru
      * @throws IOException pokud se zápis do souboru nezdaří
      */
-    public static void writeQuizResults(User user, int score, Map<String, Integer[]> categoryResults, String filename) {
+    public static void writeQuizResults(User user, int score, Map<String, Integer[]> categoryResults, String filename) throws IOException{
         StringBuilder result = new StringBuilder();
         result.append(user.getUsername()).append("\n");
         result.append(java.time.LocalDateTime.now()).append("\n");
@@ -36,13 +42,10 @@ public class DataWriter {
                 result.append(category).append(": ").append(counts[0]).append(" správně, ").append(counts[1]).append(" špatně \n")
         );
 
-        try {
-            Files.write(Paths.get(QUIZ_RESULTS_FILE),
-                    (result + "\n").getBytes(),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            System.out.println("Chyba při psaní do souboru quiz_results.txt: " + e.getMessage());
-        }
+        Files.write(Paths.get(QUIZ_RESULTS_FILE),
+                (result + "\n").getBytes(),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+
     }
     /**
      * zapisuje aktuální statistické informace pro uživatele do souboru
@@ -51,19 +54,15 @@ public class DataWriter {
      * @param user přezdívka pro kterou se hodnoty aktualizují
      * @throws IOException pokud se zápis do souboru nezdaří
      */
-    public static void writeUserStatistics(User user) {
+    public static void writeUserStatistics(User user) throws IOException {
         String data = user.getUsername() + "\n" +
                 "počet kvízů: " + user.getQuizzesTaken() + "\n" +
                 "nejvyšší dosažené skóre: "+ user.getHighestScore() + "\n" +
                 "průměrné skóre: " + String.format("%.2f\n", user.getAverageScore());
 
-        try {
-            Files.write(Paths.get(USER_STATS_FILE),
-                    (data + "\n").getBytes(),
-                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            System.out.println("Chyba při psaní do souboru user_statistics.txt: " + e.getMessage());
-        }
+        Files.write(Paths.get(USER_STATS_FILE),
+                (data + "\n").getBytes(),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
     /**

@@ -1,5 +1,6 @@
 package cz.cuni.mff.tranova;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -34,8 +35,10 @@ public class QuizManager {
      *
      * @param allQuestions seznam všech otázek z načteného souboru
      * @param filename název souboru, ze kterého jsou otázky načteny
+     *
+     * @throws IOException pokud nastne chyba při zápisu výsledků do souboru
      */
-    public void startQuiz(List<Question> allQuestions, String filename) {
+    public void startQuiz(List<Question> allQuestions, String filename) throws IOException {
         //List<Question> allQuestions = questionManager.loadQuestions("questions.txt");
         categoryManager.processCategories(allQuestions);
         Map<Integer,String> categories = categoryManager.getCategoryIdMap();
