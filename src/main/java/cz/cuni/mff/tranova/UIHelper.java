@@ -41,36 +41,60 @@ public class UIHelper {
      */
 
     public List<String> getUserCategorySelections(Map<Integer, String> categories) {
-        List<String> selections = new ArrayList<>();
-        boolean valid = false;
-        while (!valid) {
-            String line = scanner.nextLine();
-            String[] parts = line.trim().split("\\s+");
-            try {
-                for (String part : parts) {
-                    int selection = Integer.parseInt(part);
-                    if (selection == 0) {
-                        selections.addAll(categories.values());
-                        valid = true;
-                        break;
-                    } else if (categories.containsKey(selection)) {
-                        selections.add(categories.get(selection));
-                    } else {
-                        System.out.println("špatně zvolené číslo " + selection + ", zkus to znovu.");
-                        selections.clear();
-                        break;
-                    }
-                }
-                if (!selections.isEmpty()) {
-                    valid = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("musíš vybrat číslo.");
-                selections.clear();
+        while (true) {
+            System.out.println("Kategorie lze oddělit mezerami (1 2 3) nebo čárkami (1,2,3)");
+            String input = scanner.nextLine().trim();
+            List<Integer> selections = parseSelections(input);
+
+            if (selections.isEmpty()) {
+                System.out.println("Neplatný vstup, zadej platný číslený vstup");
+                continue;
             }
+
+            if (areSelectionsValid(selections, categories)) {
+                return convertSelectionsToCategories(selections, categories);
+            } else {
+                System.out.println("Neplatný vstup, zadej správná čísla kategorií");
+            }
+        }
+    }
+
+    private List<Integer> parseSelections(String input) {
+        String[] parts = input.replaceAll(",", " ").split("\\s+");
+        List<Integer> selections = new ArrayList<>();
+        try {
+            for (String part : parts) {
+                selections.add(Integer.parseInt(part));
+            }
+        } catch (NumberFormatException e) {
+            return new ArrayList<>();
         }
         return selections;
     }
+
+    private boolean areSelectionsValid(List<Integer> selections, Map<Integer, String> categories) {
+        for (Integer selection : selections) {
+            if (!(selection == 0 || categories.containsKey(selection))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<String> convertSelectionsToCategories(List<Integer> selections, Map<Integer, String> categories) {
+        List<String> categoryNames = new ArrayList<>();
+        if (selections.contains(0)) {
+            categoryNames.addAll(categories.values());
+        } else {
+            for (Integer selection : selections) {
+                if (categories.containsKey(selection)) {
+                    categoryNames.add(categories.get(selection));
+                }
+            }
+        }
+        return categoryNames;
+    }
+
 
     /**
      * Zeptá se chtěný počet otázek v kvízu
