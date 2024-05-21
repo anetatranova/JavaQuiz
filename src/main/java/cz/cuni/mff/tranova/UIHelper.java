@@ -27,6 +27,8 @@ public class UIHelper {
 
     public void showCategories(Map<Integer, String> categories, CategoryManager categoryManager) {
         System.out.println(" \n Vyber kategorii/e, číslem 0 vybereš všechny.");
+        System.out.println("Kategorie lze oddělit mezerami (1 2 3) nebo čárkami (1,2,3)");
+
         for (Map.Entry<Integer, String> entry : categories.entrySet()) {
             int questionCount = CategoryManager.getQuestionCountByCategory(entry.getValue());
             System.out.println(entry.getKey() + ": " + entry.getValue() + " (" + questionCount + " otázek)");
@@ -42,7 +44,6 @@ public class UIHelper {
 
     public List<String> getUserCategorySelections(Map<Integer, String> categories) {
         while (true) {
-            System.out.println("Kategorie lze oddělit mezerami (1 2 3) nebo čárkami (1,2,3)");
             String input = scanner.nextLine().trim();
             List<Integer> selections = parseSelections(input);
 

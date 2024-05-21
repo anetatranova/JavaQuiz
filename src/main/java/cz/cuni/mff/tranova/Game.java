@@ -21,6 +21,8 @@ public class Game {
     private static final QuestionManager questionManager = new QuestionManager();
     private static final CategoryManager categoryManager = new CategoryManager();
     private static final UIHelper uiHelper = new UIHelper();
+    //private  static final  QuizManager quizManager = new QuizManager(questionManager, categoryManager, uiHelper, currentUser);
+    public static List<QuestionResult> results = new ArrayList<>();
     private static String filename = "questions.txt";
 
     /**
@@ -65,8 +67,9 @@ public class Game {
 
     private static void runQuizCycle() throws IOException {
         List<Question> allQuestions = questionManager.loadQuestions(filename);
-        QuizManager quizManager = new QuizManager(questionManager,categoryManager, uiHelper, currentUser);
+        QuizManager quizManager = new QuizManager(questionManager,categoryManager, uiHelper, currentUser, results);
         quizManager.startQuiz(allQuestions,filename);
+        results = quizManager.results;
         //currentUser.updateScores(score);
         DataWriter.writeUserStatistics(currentUser);
     }
@@ -84,9 +87,10 @@ public class Game {
             System.out.println("2. Načíst nový soubor s otázkama");
             System.out.println("3. Změnit přezdívku");
             System.out.println("4. Podívat se na statistiky");
-            System.out.println("5. Ukončit program");
+            System.out.println("5. Uložit protokol o testu");
+            System.out.println("6. Ukončit program");
 
-            int choice = uiHelper.getValidChoice(1,5);
+            int choice = uiHelper.getValidChoice(1,6);
 
             switch (choice) {
                 case 1:
@@ -102,6 +106,9 @@ public class Game {
                     //DataWriter.writeUserStatistics(currentUser);
                     break;
                 case 5:
+                    saveQuizProtocolOption(results);
+                    break;
+                case 6:
                     System.out.println("Program ukončen");
                     System.exit(0);
                     return false;
@@ -111,7 +118,6 @@ public class Game {
         }
         //continue unless the user choosesto exit
     }
-
     /**
      * Vyžádá si název nového kvízového souboru od uživatele
      */
@@ -188,5 +194,11 @@ public class Game {
         user.setAverageScore(Double.parseDouble(userBlock.get(3).split(": ")[1].trim()));
 
         return user;
+    }
+
+    private static void saveQuizProtocolOption(List<QuestionResult> results){
+        System.out.println("Zadej jméno souboru, do kterého protokol uložit: ");
+        String protocolFilename = scanner.nextLine().trim();
+        DataWriter.saveQuizProtocol(currentUser, results, protocolFilename, filename);
     }
 }

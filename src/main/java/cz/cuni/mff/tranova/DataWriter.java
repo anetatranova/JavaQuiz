@@ -1,10 +1,14 @@
 package cz.cuni.mff.tranova;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.nio.file.Path;
 /**
  * Spravuje zápis dat do textových souborů
  * Tato třída obsahuje metody pro psaní výsledků kvízu a statistických informací do souborů
@@ -87,6 +91,39 @@ public class DataWriter {
         } else {
             return 0.0;
         }
+    }
+
+    public static void saveQuizProtocol(User user, List<QuestionResult> results, String protocolFilename, String filename) {
+        Path path = Paths.get(protocolFilename);
+
+        List<String> lines = new ArrayList<>();
+        lines.add("Přezdívka: "+ user.getUsername());
+        lines.add("Čas: " + java.time.LocalDateTime.now());
+        lines.add("Název kvízového souboru: " + filename + "\n");
+        for (QuestionResult result : results){
+            lines.add("Otázka: " + result.getQuestionText());
+            lines.add("Vaše odpověď:    " + result.getUserAnswer());
+            lines.add("Správná odpověď: " + isCorrectAnswer(result) + "\n");
+        }
+
+        try {
+            Files.write(path, lines,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.WRITE);
+        }catch (IOException e){
+            System.out.println("Zápis do protokolu se nezdařil");
+        }
+    }
+
+    private static String isCorrectAnswer(QuestionResult result){
+        String line = "";
+        if (result.isCorrect()){
+            line = "Vaše odpověď byla správná.";
+        }
+        else{
+            line= result.getCorrectAnswer();
+        }
+        return line;
     }
 
 }

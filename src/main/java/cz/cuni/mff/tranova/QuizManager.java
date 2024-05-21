@@ -12,6 +12,8 @@ public class QuizManager {
     private CategoryManager categoryManager;
     private UIHelper uiHelper;
     private User currentUser;
+    public List<QuestionResult> results;
+
 
     /**
      * Konstruktory pro QuizManager instanci
@@ -20,13 +22,15 @@ public class QuizManager {
      * @param categoryManager pomocná trída pro práci s kategoriemi
      * @param uiHelper pomocná třída pro správu uživatelksého rozhraní
      * @param currentUser aktuální uživatel (reprezentován přezdívkou)
+     * @param results
      */
 
-    public QuizManager(QuestionManager questionManager, CategoryManager categoryManager, UIHelper uiHelper, User currentUser) {
+    public QuizManager(QuestionManager questionManager, CategoryManager categoryManager, UIHelper uiHelper, User currentUser, List<QuestionResult> results) {
         this.questionManager = questionManager;
         this.categoryManager = categoryManager;
         this.uiHelper = uiHelper;
         this.currentUser = currentUser;
+        this.results = results;
     }
 
     /**
@@ -115,8 +119,10 @@ public class QuizManager {
 
             String userSelectedAnswer = question.getAnswers().get(userAnswerIndex);
             question.setUserAnswer(userSelectedAnswer);
+            boolean isCorrect = userSelectedAnswer.equalsIgnoreCase(question.getRightAnswer());
+            results.add(new QuestionResult(question.getText(), userSelectedAnswer, question.getRightAnswer(), isCorrect));
 
-            if (userSelectedAnswer.equalsIgnoreCase(question.getRightAnswer())) {
+            if (isCorrect) {
                 correctCount++;
                 System.out.println("Správná odpověď!");
             } else {
