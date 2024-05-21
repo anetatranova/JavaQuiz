@@ -5,10 +5,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.nio.file.Path;
+import java.util.Locale;
+
+import static java.util.Locale.*;
+
 /**
  * Spravuje zápis dat do textových souborů
  * Tato třída obsahuje metody pro psaní výsledků kvízu a statistických informací do souborů
@@ -43,12 +49,14 @@ public class DataWriter {
      */
     public static void writeQuizResults(User user, int score, Map<String, Integer[]> categoryResults, String filename) throws IOException{
         StringBuilder result = new StringBuilder();
+        DecimalFormat decimalFormat = getDecimalFormat();
+
         result.append(user.getUsername()).append("\n");
         result.append(java.time.LocalDateTime.now()).append("\n");
         result.append("název souboru: ").append(filename).append("\n");
         result.append("počet bodů: ").append(score).append("\n");
         double winPercentage = calculateWinPercentage(categoryResults);
-        result.append("úspěšnost: ").append(String.format("%.2f", winPercentage)).append(" %").append("\n");
+        result.append("úspěšnost: ").append(decimalFormat.format(winPercentage)).append(" %").append("\n");
 
         categoryResults.forEach((category, counts) ->
                 result.append(category).append(": ").append(counts[0]).append(" správně, ").append(counts[1]).append(" špatně \n")
@@ -67,10 +75,11 @@ public class DataWriter {
      * @throws IOException pokud se zápis do souboru nezdaří
      */
     public static void writeUserStatistics(User user) throws IOException {
+        DecimalFormat decimalFormat = getDecimalFormat();
         String data = user.getUsername() + "\n" +
                 "počet kvízů: " + user.getQuizzesTaken() + "\n" +
                 "nejvyšší dosažené skóre: "+ user.getHighestScore() + "\n" +
-                "průměrné skóre: " + String.format("%.2f\n", user.getAverageScore());
+                "průměrné skóre: " + decimalFormat.format(user.getAverageScore()) + "\n";
 
         Files.write(Paths.get(USER_STATS_FILE),
                 (data + "\n").getBytes(),
@@ -140,6 +149,11 @@ public class DataWriter {
             line= result.getCorrectAnswer();
         }
         return line;
+    }
+
+    private static DecimalFormat getDecimalFormat() {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(ENGLISH);
+        return new DecimalFormat("0.00", symbols);
     }
 
 }
