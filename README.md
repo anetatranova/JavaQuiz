@@ -65,6 +65,8 @@ Po dokončení kvízu se zobrazí následující možnosti:
    - po změně přezdívky se opět zobrazí tyto možnosti
 4. Podívat se na statistiky.
    - zobrazí se počet dokončených kvízu, nejvyšší dosažené skóre a průměrné skóre
+5. Uložit protokol o testu.
+   - uživatel bude vyzván k zadání jména souboru, kam protokol uložit (najde jej v kořenu repozitáře)
 5. Ukončit program.
    - program se ukončí
 
@@ -75,3 +77,10 @@ Výsledky kvízu jsou uloženy v `./data/quiz_results.txt`. Každý záznam o kv
 
 ### Soubor se statistikami
 Průběžné statistiky jsou zaznamenávány v `./data/user_statistics.txt`. Tento soubor obsahuje údaje jako jsou celkový počet dokončených kvízů, nejvyšší dosažené skóre a průměrné skóre.
+
+## Dokumentace
+Pro vygenerování dokumentace použijte:
+```ruby
+mvn javadoc:javadoc
+```
+Dokumentace bude následně dostupná ve složce target/site/apidocs.
