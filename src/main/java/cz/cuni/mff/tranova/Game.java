@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Třída spravuje hlavní game loop a část interakce s uživatelem (hlavně co se týče přezdívky)
- * Spravuje vstup, quiz flow a podle výběru uživatele zřizuje akce, které provést dál
- * Dovoluje uživateli kvíz začít, změnit kvízový soubor nebo přezdívku, či kouknout na statistiku pro danou přezdívku
+ * Třída spravuje hlavní game loop a část interakce s uživatelem.
+ * Spravuje vstup, quiz flow a podle výběru uživatele zřizuje akce, které provést dál.
+ * Dovoluje uživateli kvíz začít, změnit kvízový soubor nebo přezdívku, či kouknout na statistiku pro danou přezdívku.
  */
 public class Game {
 
@@ -22,7 +22,7 @@ public class Game {
     private static final CategoryManager categoryManager = new CategoryManager();
     private static final UIHelper uiHelper = new UIHelper();
     /**
-     * uložené výsledky kvízu
+     * Uložené výsledky kvízu
      */
     //private  static final  QuizManager quizManager = new QuizManager(questionManager, categoryManager, uiHelper, currentUser);
     public static List<QuestionResult> results = new ArrayList<>();

@@ -16,8 +16,8 @@ import java.util.Locale;
 import static java.util.Locale.*;
 
 /**
- * Spravuje zápis dat do textových souborů
- * Tato třída obsahuje metody pro psaní výsledků kvízu a statistických informací do souborů
+ * Spravuje zápis dat do textových souborů.
+ * Tato třída obsahuje metody pro psaní výsledků kvízu a statistických informací do souborů.
  */
 public class DataWriter {
     /**
@@ -37,9 +37,9 @@ public class DataWriter {
     }
 
     /**
-     * Zapisuje výsledky kvízu uživatele do textového souboru
+     * Zapisuje výsledky kvízu uživatele do textového souboru.
      * Každý zápis obsahuje přezdívku, timestamp dokončení kvízu, název kvízového souboru
-     * dosažené skóre, úspěšnost a výpis výsledků podle kategorie
+     * dosažené skóre, úspěšnost a výpis výsledků podle kategorie.
      *
      * @param user přezdívka uživatele
      * @param score dosažené skóre
@@ -68,8 +68,8 @@ public class DataWriter {
 
     }
     /**
-     * zapisuje aktuální statistické informace pro uživatele do souboru
-     * to zahrnuje: počet dokončených kvízů, nejvyšší dosažené skóre, průměrné dosažené skóre
+     * Zapisuje aktuální statistické informace pro uživatele do souboru
+     * to zahrnuje: počet dokončených kvízů, nejvyšší dosažené skóre, průměrné dosažené skóre.
      *
      * @param user přezdívka pro kterou se hodnoty aktualizují
      * @throws IOException pokud se zápis do souboru nezdaří

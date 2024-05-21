@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 /**
- * Spravuje a organizuje otázky - načítá je ze souboru, parsuje je do Question objektu, filtruje je podle kategorie
+ * Spravuje a organizuje otázky - načítá je ze souboru, parsuje je do Question objektu, filtruje je podle kategorie.
  */
 public class QuestionManager {
 
     private ArrayList<Question> questions;
     /**
-     * Konstruktor pro novoy QuestionManager instanci, inicializuje seznams  Question objekty
+     * Konstruktor pro novou QuestionManager instanci, inicializuje seznam s Question objekty.
      */
     public QuestionManager(){
         this.questions = new ArrayList<>();

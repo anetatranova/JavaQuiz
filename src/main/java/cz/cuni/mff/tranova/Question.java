@@ -2,7 +2,7 @@ package cz.cuni.mff.tranova;
 
 import java.util.*;
 /**
- * Tato třída reprezentuje jednu otázku - obsahuje kategorii, otázku, správnou odpověď a ostatní odpovědi
+ * Tato třída reprezentuje jednu otázku - obsahuje kategorii, otázku, správnou odpověď a ostatní odpovědi.
  */
 public class Question {
 
@@ -25,8 +25,8 @@ public class Question {
     public List<String> answers;
     private String userAnswer;
     /**
-     * Konstruktory pro novou Question instanci
-     * Všechny odpovědi jsou zamíchany
+     * Konstruktory pro novou Question instanci.
+     * Všechny odpovědi jsou zamíchany.
      *
      * @param category kategorie ke které otázka patří
      * @param text text otázky

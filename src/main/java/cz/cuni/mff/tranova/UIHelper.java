@@ -3,8 +3,8 @@ package cz.cuni.mff.tranova;
 import java.util.*;
 
 /**
- * Spravuje uživatelské rozhraní jako výčet kategorií a otázek a zachycuje uživatelský vstup, který dál zpracovávát
- * Tato třída přímo iteraguje s uživatelem a organizuje je tak vstupy a výstupy programu
+ * Spravuje uživatelské rozhraní jako výčet kategorií a otázek a zachycuje uživatelský vstup, který dál zpracovávát.
+ * Tato třída přímo iteraguje s uživatelem a organizuje je tak vstupy a výstupy programu.
  */
 
 public class UIHelper {
@@ -19,7 +19,7 @@ public class UIHelper {
     }
 
     /**
-     * ZObrazuje dostupné kvízové kategorie
+     * Zobrazuje dostupné kvízové kategorie
      *
      * @param categories mapa s číselným identifikétorem a kategorie
      * @param categoryManager pomocná třída pro práci s kategoriemi, použita pro získání počtu otázek
@@ -36,7 +36,7 @@ public class UIHelper {
     }
 
     /**
-     * Zachycuje výběr kategorie
+     * Získává výběr kategorie
      *
      * @param categories mapa s číselným identifikétorem a kategorie
      * @return seznam jmen vybraných kategorií

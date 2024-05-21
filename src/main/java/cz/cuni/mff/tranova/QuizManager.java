@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Tato třída organizuje flow kvízu - od výběru kategorií a otázek až k výpočtu skóre a zápisu výsledků
+ * Tato třída organizuje flow kvízu - od výběru kategorií a otázek až k výpočtu skóre a zápisu výsledků.
  */
 
 public class QuizManager {
@@ -14,7 +14,7 @@ public class QuizManager {
     private User currentUser;
 
     /**
-     * uložené výsledky kvízu
+     * Uložené výsledky kvízu
      */
     public List<QuestionResult> results;
 
@@ -38,8 +38,8 @@ public class QuizManager {
     }
 
     /**
-     * Začíná kvíz načtením otázek, výběrem kategorií, filtrováním otázek a spuštěním kvízu
-     * Aktualizuje skŕe a zapíše jej do souboru
+     * Začíná kvíz načtením otázek, výběrem kategorií, filtrováním otázek a spuštěním kvízu.
+     * Aktualizuje skóre a zapíše jej do souboru.
      *
      * @param allQuestions seznam všech otázek z načteného souboru
      * @param filename název souboru, ze kterého jsou otázky načteny

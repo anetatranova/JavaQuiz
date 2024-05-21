@@ -1,7 +1,7 @@
 package cz.cuni.mff.tranova;
 
 /**
- * Ukládaá výsledky kvízu pro zápis chybového protokolu
+ * Ukládá výsledky kvízu pro zápis chybového protokolu
  */
 public class QuestionResult {
     private String text;

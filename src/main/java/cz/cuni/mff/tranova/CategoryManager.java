@@ -3,7 +3,7 @@ package cz.cuni.mff.tranova;
 import java.util.*;
 
 /**
- * Spravuje katergorie kvízu - mapuje ID a kategorie, přiřazuje otázky k vhodné kategorii, počítá otzáky
+ * Spravuje katergorie kvízu - mapuje ID a kategorie, přiřazuje otázky k vhodné kategorii, počítá otázky.
  */
 public class CategoryManager {
 

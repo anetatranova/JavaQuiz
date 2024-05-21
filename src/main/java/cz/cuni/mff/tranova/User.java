@@ -1,7 +1,7 @@
 package cz.cuni.mff.tranova;
 
 /**
- * Tato třída reprezentuje uživatele, ukládá a spravuje uživatelská data
+ * Tato třída reprezentuje uživatele, ukládá a spravuje uživatelská data.
  */
 public class User {
     private final String username;
