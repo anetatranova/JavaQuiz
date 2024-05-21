@@ -12,6 +12,10 @@ public class QuizManager {
     private CategoryManager categoryManager;
     private UIHelper uiHelper;
     private User currentUser;
+
+    /**
+     * uložené výsledky kvízu
+     */
     public List<QuestionResult> results;
 
 
@@ -22,7 +26,7 @@ public class QuizManager {
      * @param categoryManager pomocná trída pro práci s kategoriemi
      * @param uiHelper pomocná třída pro správu uživatelksého rozhraní
      * @param currentUser aktuální uživatel (reprezentován přezdívkou)
-     * @param results
+     * @param results výsledky kvízu
      */
 
     public QuizManager(QuestionManager questionManager, CategoryManager categoryManager, UIHelper uiHelper, User currentUser, List<QuestionResult> results) {

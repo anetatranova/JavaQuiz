@@ -22,6 +22,14 @@ public class DataWriter {
      * Cesta k souboru se statistikami uživatelů, tento soubor obsahuje souhrnné statistiky o výkonech všech uživatelů
      */
     public static final String USER_STATS_FILE = "./data/user_statistics.txt";
+
+    /**
+     * Inicialuzije novou instanci třídy DataWriter
+     */
+    public DataWriter() {
+        super();
+    }
+
     /**
      * Zapisuje výsledky kvízu uživatele do textového souboru
      * Každý zápis obsahuje přezdívku, timestamp dokončení kvízu, název kvízového souboru
@@ -93,6 +101,14 @@ public class DataWriter {
         }
     }
 
+    /**
+     * Zapíše chybový protokol do vybraného souboru
+     *
+     * @param user aktuální uživatel
+     * @param results výsledky dokončeného kvízu
+     * @param protocolFilename soubor do kterého chybový protocol uložit
+     * @param filename kvízový soubor
+     */
     public static void saveQuizProtocol(User user, List<QuestionResult> results, String protocolFilename, String filename) {
         Path path = Paths.get(protocolFilename);
 

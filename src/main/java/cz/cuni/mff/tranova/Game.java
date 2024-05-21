@@ -21,9 +21,19 @@ public class Game {
     private static final QuestionManager questionManager = new QuestionManager();
     private static final CategoryManager categoryManager = new CategoryManager();
     private static final UIHelper uiHelper = new UIHelper();
+    /**
+     * uložené výsledky kvízu
+     */
     //private  static final  QuizManager quizManager = new QuizManager(questionManager, categoryManager, uiHelper, currentUser);
     public static List<QuestionResult> results = new ArrayList<>();
     private static String filename = "questions.txt";
+
+    /**
+     * Inicializuje novou instanci třídy Game
+     */
+    public Game(){
+        super();
+    }
 
     /**
      * Inicializuje kvíz
