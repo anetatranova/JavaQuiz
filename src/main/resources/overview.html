@@ -1,0 +1,39 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Dokumentace projektu</title>
+</head>
+<body>
+<h1>Popis projektu</h1>
+<p>Tento projekt je implementace kvízové aplikace, která uživatelům umožňuje odpovídat na otázky z různých kategorií a dále sledovat a ukládat své výsledky.</p>
+<h2>Struktura</h2>
+<p>Projekt je rozdělen na několika hlavních komponent:</p>
+<ul>
+    <li><strong>Game:</strong> Hlavní řídící třída, která spouští a spravuje kvíz.</li>
+    <li><strong>QuizManager:</strong> Spravuje a řídí každé jedno kolo kvízu.</li>
+    <li><strong>UIHelper:</strong> Spravuje komunikaci mezi uživatelem a programem.</li>
+    <li><strong>DataWriter:</strong> Spravuje zápis do textových suborů.</li>
+    <li><strong>User:</strong> Reprezentuje uživatele.</li>
+</ul>
+<h2>Instalace a spuštění</h2>
+<p>Celý projekt lze nalézt na tomto <a href="https://github.com/anetatranova/JavaQuiz">repozitáři</a>. Pro spuštění programu je potřeba tento projekt stáhnout, například pomocí:</p>
+<pre>git clone https://github.com/anetatranova/JavaQuiz</pre>
+<p>Po stažení je nutno otevřít složku projektu. Pro zahájení programu spusťte: </p>
+<pre>mvn clean install</pre>
+<pre>mvn exec:java</pre>
+<p>Pro vygenerování dokumentace použijte:</p>
+<pre>mvn javadoc:javadoc</pre>
+<p>Dokumentace bude následně dostupná ve složce <code>target/site/apidocs</code>.</p>
+<h2>Navigace v aplikaci</h2>
+<p>Po spuštění aplikace bude užiatel vyzván k zadání své přezdívky. Poté si může vybrat kategorie kvízu, počet otázek a pak se spustí kvíz s otázkama. Po dokončení kvízu je zobrazena nabídka s možnostmi pro další kroky. Uživatel si může vybrat z následujících: </p>
+<ul>
+    <li>1. Pokračovat ve stejném souboru s kvízem.</li>
+    <li>2. Načíst nový soubor s otázkama.</li>
+    <li>3. Změnit přezdívku</li>
+    <li>4. Podívat se na statistiky</li>
+    <li>5. Uložit protokol o testu</li>
+    <li>6. Ukončit program</li>
+</ul>
+<p>Více informací o tomto programu naleznete v <a href="https://github.com/anetatranova/JavaQuiz/blob/main/README.md">README.md</a>.</p>
+</body>
+</html>
